@@ -193,6 +193,63 @@ $(document).ready(function () {
         let filterBlock = $(this).siblings('.label__block-filter');
         if(filterBlock.is(":visible") === true){
             filterBlock.hide(300);
+            $(this).children('.row__arrow').css({'transform':'rotate(180deg)'});
         }
-    })
+        if(filterBlock.is(":hidden") === true){
+            filterBlock.show(300);
+            $(this).children('.row__arrow').css({'transform':'rotate(0deg)'});
+        }
+    });
+    // $('.label__block-filter').on('click', '#start-date-asc', function() {
+    //     console.log("click");
+    //     $('.table__row').sort(function (a, b) {
+    //         let sortA = $(a).data('date-start');
+    //         let sortB = $(b).data('date-start');
+    //         return (sortA < sortB) ? -1 : (sortA > sortB) ? 1 : 0;
+    //     });
+    // });
+    $('#start-date-asc').click(function() {
+        console.log("click2");
+        let html = $('.table__row').sort(function (a, b) {
+            let sortA = $(a).data('date-start');
+            let sortB = $(b).data('date-start');
+            console.log(sortB);
+            console.log(sortA);
+            return (sortA < sortB) ? -1 : (sortA > sortB) ? 1 : 0;
+        });
+        $('.tasks-list').html(html);
+    });
+    $('#start-date-desc').click(function() {
+        console.log("click2");
+        let html = $('.table__row').sort(function (a, b) {
+            let sortA = $(a).data('date-start');
+            let sortB = $(b).data('date-start');
+            console.log(sortB);
+            console.log(sortA);
+            return (sortA < sortB) ? 1 : (sortA > sortB) ? -1 : 0;
+        });
+        $('.tasks-list').html(html);
+    });
+    $('#end-date-desc').click(function() {
+        console.log("click2");
+        let html = $('.table__row').sort(function (a, b) {
+            let sortA = $(a).data('date-end');
+            let sortB = $(b).data('date-end');
+            console.log(sortB);
+            console.log(sortA);
+            return (sortA < sortB) ? 1 : (sortA > sortB) ? -1 : 0;
+        });
+        $('.tasks-list').html(html);
+    });
+    $('#end-date-asc').click(function() {
+        console.log("click2");
+        let html = $('.table__row').sort(function (a, b) {
+            let sortA = $(a).data('date-end');
+            let sortB = $(b).data('date-end');
+            console.log(sortB);
+            console.log(sortA);
+            return (sortA < sortB) ? -1 : (sortA > sortB) ? 1 : 0;
+        });
+        $('.tasks-list').html(html);
+    });
 });

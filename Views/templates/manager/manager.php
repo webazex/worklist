@@ -21,7 +21,7 @@ else:
         endforeach;
         $performersList = getUsersList($arIds);
         $names = implode(", ", $performersList);
-        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="tId-' . $task[0] . '" action="">
+        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="tId-' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
 <input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '">
         <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '" readonly="readonly">
         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '" readonly="readonly">
@@ -102,11 +102,11 @@ else:
                 <span class="row__arrow"></span>
                 </div>
             <div class="label__block-filter">
-            <button type="button" class="block-filter__asc">
+            <button type="button" class="block-filter__asc" id="start-date-asc">
                 <img class="asc__img" src="/Sources/pic/asc.png">
                 <span>За зростанням</span>
             </button>
-            <button class="block-filter__desc">
+            <button class="block-filter__desc" id="start-date-desc">
             <img class="desc__img" src="/Sources/pic/desc.png">
                 <span>За спаданням</span>
 </button>
@@ -121,7 +121,7 @@ else:
         <span class="label__text">Тема</span>
         <input type="search" name="search-theme">
         </div>
-        <div class="labels-row__label">
+        <div class="labels-row__label numbers">
         <div class="label__block-moz">
         <span class="labels-row__label">Номер вхідного по МОЗ</span>
         <input type="search" name="search-moz">
@@ -143,11 +143,31 @@ else:
         <span class="label__text">Виконавці(-ець)</span>
         <input type="search" name="search-department-perfomance">
         </div>
-        <span class="labels-row__label">Кінцева дата</span>
+        <div class="labels-row__label">
+            <div class="label__text">
+            <div class="text__row">
+                <span class="row__txt">Кінцева дата</span>
+                <span class="row__arrow"></span>
+                </div>
+            <div class="label__block-filter">
+            <button type="button" class="block-filter__asc" id="end-date-asc">
+                <img class="asc__img" src="/Sources/pic/asc.png">
+                <span>За зростанням</span>
+            </button>
+            <button class="block-filter__desc" id="end-date-desc">
+            <img class="desc__img" src="/Sources/pic/desc.png">
+                <span>За спаданням</span>
+</button>
+</div>
+            </div>
+            
+            <input type="date" name="search-start-date-e">
+            <input type="date" name="search-end-date-e">
+        </div>
         <span class="labels-row__label">Відправник</span>
         <span class="labels-row__label">Куди відправлено</span>
         <span class="labels-row__label">Статус</span>
-</div> ' . $rows . '
+</div> <div class="tasks-list">' . $rows . '</div>
 
 </div>
 </div>
