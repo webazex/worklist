@@ -20,6 +20,7 @@ class DB
 
     static function db_connect()
     {
+        mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
        $mysqli = new \mysqli('localhost:3307', 'webazex', 'Webazex*01!', 'task');
 //         $mysqli = new \mysqli('134.249.158.47', 'root', '', 'task');
         return $mysqli;
@@ -157,14 +158,18 @@ class DB
             $arfields = array();
             $arvalues = array();
             foreach ($arr as $f => $v):
+                $f = "`".$f."`";
                 array_push($arfields, $f);
                 $v = "'" . $v . "'";
                 array_push($arvalues, $v);
             endforeach;
             $fields = implode(",", $arfields);
-
+//            echo $fields;
             $values = implode(", ", $arvalues);
+//            echo $values;
+//            die();
             $table_name = $bd->real_escape_string($table_name);
+//            $query = $bd->real_query("INSERT INTO `tasks` (`id`, `letter_num-moz`, `letter_num-ascod`, `letter_num-departament`, `title`, `performers_departament`, `description`, `date_start`, `date_end`, `sender`, `recipient`, `performers`, `status`) VALUES (NULL, '45435435', '3452354234', '234', 'fcvfdgdsf', 'gdfs asdfa aseaf sdz', 'dsfdszf ', '2020-06-17', '2020-06-26', 'sadfas', 'fdsafs', '\"2\" "19" "20"', 'dfdfgd');")
             $query = $bd->real_query("INSERT INTO " . "`" . $table_name . "` (" . $fields . ") VALUES (" . $values . ")");
             if ($query == false):
                 $er = $bd->error;
@@ -315,7 +320,7 @@ class DB
             $bd = self::db_connect();
            $arRezult = array();
             foreach ($ids as $id):
-                $bd->real_query("SELECT `fio` FROM `users` WHERE `id` LIKE ".$id);
+                $bd->real_query("SELECT `fio` FROM `users` WHERE `id` LIKE  ".$id);
                 $ret = $bd->use_result();
                 while ($row = $ret->fetch_row()):
                     array_push($arRezult, $row[0]);
@@ -325,7 +330,8 @@ class DB
         endif;
     }
 }
-
+// по возрастанию SELECT * FROM `tasks` ORDER BY `tasks`.`letter_num-moz` ASC
+//по убыванию SELECT * FROM `tasks` ORDER BY `tasks`.`letter_num-moz` DESC
 // ====for=test====
 if (!empty($_POST)):
     $data = new DB;
@@ -338,6 +344,8 @@ if (!empty($_POST)):
 //    $r = $data::db_get_custom_fields_with_filter('roles', 'code_role', 'role', $role);
 //    var_dump($r);
 //$q = $data::db_select_in_user_table('webazex', '12345', 3);
+//$ar = array(20, 19, 2);
+//    $q = $data::db_get_users($ar);
 //echo('<pre>');
 //print_r($q);
 //echo('</pre>');

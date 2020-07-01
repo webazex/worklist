@@ -200,6 +200,11 @@ h2 {font-size: 1.5rem;}
 .tabs__block {
     width: 100%;
 }
+.tabs-section__new-task-form {
+    max-width: 900px;
+    width: 100%;
+    margin: 0 auto;
+}
 .tabs__tabs-rows {
     display: flex;
     justify-content: flex-start;
@@ -241,17 +246,19 @@ h2 {font-size: 1.5rem;}
     margin-left: 20px;
 }
 .content__form {
+    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, minmax(300px, 1fr));
     grid-template-areas:
             "task-number-ascod task-number-department task-number-moz"
             "date-start date-end title"
+            "department-perfomance department-perfomance department-perfomance"
             "desc desc desc";
     grid-gap: 15px;
     order: 0;
 }
-.content__form input::placeholder {font-size: 14px;}
-.content__form textarea::placeholder {font-size: 14px;}
+.content__form input::placeholder {font-size: 12px;}
+.content__form textarea::placeholder {font-size: 12px;}
 .content__form input, .content__form label input {
     padding: 5px;
     height: 40px;
@@ -268,6 +275,7 @@ h2 {font-size: 1.5rem;}
 }
 .task-num-askod {grid-area: task-number-ascod;}
 .task-num-departament {grid-area: task-number-department;}
+.department-perfomance {grid-area: department-perfomance;}
 .task-num-moz {grid-area: task-number-moz;}
 .task-title {grid-area: title;}
 .task-theme, .date-start, .date-end {
@@ -307,7 +315,7 @@ h2 {font-size: 1.5rem;}
 }
 .table__labels-row {
     display: grid;
-    grid-template-columns: repeat(11, 160px);
+    grid-template-columns: repeat(9, 150px);
     grid-column-gap: 10px;
     justify-content: space-between;
     grid-template-areas:
@@ -315,10 +323,68 @@ h2 {font-size: 1.5rem;}
     padding: 5px;
     border-bottom: 1px solid black;
 }
-.labels-row__label {font-weight: bold; font-size: 16px; text-align: center}
+.labels-row__label {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.label__text {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 25px;
+    width: 100%;
+    flex-direction: column;
+}
+.text__row{
+    width: 100%;
+    display: flex;
+    height: 100%;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+.row__txt {
+    width: 130px;
+    font-weight: bold;
+    font-size: 12px;
+    text-align: center;
+}
+.row__arrow {
+    width: 10px;
+    height: 6px;
+    display: block;
+    background: url("/Sources/pic/arrow-b.png") no-repeat;
+    background-size: contain;
+    cursor: pointer;
+    transition: all;
+    /*transform: rotate(90deg);*/
+}
+.label__block-filter {
+    position: absolute;
+    width: 100%;
+    top: 25px;
+   padding: 5px;
+    box-sizing: border-box;
+    z-index: 1;
+    background: lightgray;
+}
+.label__block-filter button {
+    width: 100%;
+    height: 25px;
+    margin: 5px 0;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    background: white;
+    color: grey;
+}
 .table__row {
     display: grid;
-    grid-template-columns: repeat(11, 160px);
+    grid-template-columns: repeat(11, 100px);
     grid-column-gap: 10px;
     justify-content: space-between;
     grid-template-areas:

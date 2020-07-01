@@ -175,9 +175,29 @@ function getListUsersNames()
     $names = getUsersName("OR");
     return $names;
 }
-
+//===add task
 if (isset($_POST['addTask'])):
     $val = false;
+    if (empty($_POST['department-perfomance'])):
+        $department_perfomance = "";
+    else:
+        $department_perfomance = $_POST['department-perfomance'];
+    endif;
+    if (empty($_POST['task_num-department'])):
+        $task_num_department = "";
+    else:
+        $task_num_department = $_POST['task_num-department'];
+    endif;
+    if (empty($_POST['task_num-askod'])):
+        $task_num_askod = "";
+    else:
+        $task_num_askod = $_POST['task_num-askod'];
+    endif;
+    if (empty($_POST['task_num-moz'])):
+        $task_num_moz = "";
+    else:
+        $task_num_moz = $_POST['task_num-moz'];
+    endif;
     if (empty($_POST['task__desc'])):
         $desc = "";
     else:
@@ -189,10 +209,13 @@ if (isset($_POST['addTask'])):
             $item = '"' . $userId . '"';
             array_push($arrUsersId, $item);
         endforeach;
-        $users = implode(" ", $arrUsersId);
+        $users = implode(",", $arrUsersId);
         $data = array(
-            'letter_num' => $_POST['task_num'],
+            'letter_num-moz' => $task_num_moz,
+            'letter_num-ascod' => $task_num_askod,
+            'letter_num-departament' =>  $task_num_department,
             'title' => $_POST['task__title'],
+            'performers_departament' => $department_perfomance,
             'description' => $desc,
             'date_start' => $_POST['date-start'],
             'date_end' => $_POST['date-end'],
@@ -201,7 +224,7 @@ if (isset($_POST['addTask'])):
             'performers' => $users,
             'status' => "В роботі"
         );
-        $send = $users = implode(" ", $_POST['users']);
+        $send = implode(" ", $_POST['users']);
         $val = true;
     endif;
     if ($val === true):
@@ -215,13 +238,14 @@ if (isset($_POST['addTask'])):
         echo "zero";
     endif;
 endif;
+//===end task
 function getTaskForUser($like)
 {
     $tasks = getArrTasksForUser($like);
     return $tasks;
 }
 function getUsers($str){
-    $ar = explode(" ", $str);
+    $ar = explode(",", $str);
     $rezult = getUsersList($ar);
     return $rezult;
 }

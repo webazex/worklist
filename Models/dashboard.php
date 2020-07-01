@@ -31,7 +31,6 @@ function getArrTasksForUser($like)
     $tasks = bd::db_get_rows_for_user($like);
     return $tasks;
 }
-
 function getUsersList($ar = array()){
     $rezult = bd::db_get_users($ar);
     return $rezult;

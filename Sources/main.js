@@ -189,4 +189,10 @@ $(document).ready(function () {
             });
         }
     });
+    $('.text__row').click(function () {
+        let filterBlock = $(this).siblings('.label__block-filter');
+        if(filterBlock.is(":visible") === true){
+            filterBlock.hide(300);
+        }
+    })
 });

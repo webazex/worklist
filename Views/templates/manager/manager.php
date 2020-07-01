@@ -13,7 +13,7 @@ if (empty($tasks)):
     echo "zero-t";
 else:
     foreach ($tasks as $task):
-        $ar = explode(" ", $task[11]);
+        $ar = explode(",", $task[11]);
         $arIds = array();
         foreach ($ar as $a):
             $a = preg_replace("/\"/", " ", $a);
@@ -32,8 +32,6 @@ else:
         <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
         <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
         <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
-</div>
-<div class="row__section-second">
 
         
        <select class="row__col-status"  name="status">
@@ -41,7 +39,7 @@ else:
        <option value="1"><span>Виконано</span></option>
 </select>
         <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
-</div>
+
         <div class="row__btns-row">
         <button type="submit" name="edittask" id="edit_task">Зберегти зміни</button>
         <button type="reset" class="reset-btn">Відміна</button>
@@ -76,9 +74,9 @@ else:
 </div>
 </div>
 <div class="content__form">
-<input type="text" name="task_num" class="task-num-departament"  placeholder="Вкажіть номер вхідного листа по департаменту">
-<input type="text" name="task_num" class="task-num-askod" placeholder="Вкажіть номер вхідного листа по ASCOD">
-<input type="text" name="task_num" class="task-num-moz"  placeholder="Вкажіть номер вхідного листа по МОЗ">
+<input type="text" name="task_num-departament" class="task-num-departament"  placeholder="Вкажіть номер вхідного листа по департаменту">
+<input type="text" name="task_num-askod" class="task-num-askod" placeholder="Вкажіть номер вхідного листа по ASCOD">
+<input type="text" name="task_num-moz" class="task-num-moz"  placeholder="Вкажіть номер вхідного листа по МОЗ">
 <label class="task-theme"><span>Вкажіть тему вхідного листа</span><input type="text" name="task__title" class="task-title" required="required"  placeholder="Не обов’язково"></label>
 <label class="date-start"><span>Дата постановки задачі</span>
     <input type="date" name="date-start"  required="required" min="" max="">
@@ -87,7 +85,7 @@ else:
     <input type="date" name="date-end"  required="required">
 </label>
 
-
+<textarea name="department-perfomance" class="department-perfomance" placeholder="Вкажіть виконавців департаменту (якщо потрібно)"></textarea>
 <textarea name="task__desc" class="textarea" placeholder="Вкажіть деталі вхідного листа (якщо потрібно)"></textarea>
 <input type="hidden" name="addTask" value="' . $key_for_hidden . '">
                 </div>
@@ -96,13 +94,55 @@ else:
             <div class="callback" id="callback"></div>
         </div><div class="section-container__tabs-section" data-id="2">
         <div class="tabs-section__table"><div class="table__labels-row">
-        <span class="labels-row__label">Дата постановки задачі</span>
-        <span class="labels-row__label">Тема</span>
+        <div class="labels-row__label">
+        <div class="label__data-block-label">
+            <div class="label__text">
+            <div class="text__row">
+                <span class="row__txt">Дата постановки задачі</span>
+                <span class="row__arrow"></span>
+                </div>
+            <div class="label__block-filter">
+            <button type="button" class="block-filter__asc">
+                <img class="asc__img" src="/Sources/pic/asc.png">
+                <span>За зростанням</span>
+            </button>
+            <button class="block-filter__desc">
+            <img class="desc__img" src="/Sources/pic/desc.png">
+                <span>За спаданням</span>
+</button>
+</div>
+            </div>
+            
+            <input type="date" name="search-start-date">
+            <input type="date" name="search-end-date">
+        </div>
+        </div>
+        <div class="labels-row__label">
+        <span class="label__text">Тема</span>
+        <input type="search" name="search-theme">
+        </div>
+        <div class="labels-row__label">
+        <div class="label__block-moz">
         <span class="labels-row__label">Номер вхідного по МОЗ</span>
+        <input type="search" name="search-moz">
+</div>
+        <div class="label__block-ascod">
         <span class="labels-row__label">Номер вхідного по ASCOD</span>
-        <span class="labels-row__label">Виконавці по департаменту</span>
+        <input type="search" name="search-ascod">
+</div>
+        <div class="label__block-department">
         <span class="labels-row__label">Номер вхідного по Департаменту</span>
-        <span class="labels-row__label">Виконавці(-ець)</span>
+        <input type="search" name="search-department">
+</div>
+</div>       
+        <div class="labels-row__label">
+        <span class="label__text">Виконавці по департаменту</span>
+        <input type="search" name="search-department-perfomance">
+        </div>
+        <div class="labels-row__label">
+        <span class="label__text">Виконавці(-ець)</span>
+        <input type="search" name="search-department-perfomance">
+        </div>
         <span class="labels-row__label">Кінцева дата</span>
         <span class="labels-row__label">Відправник</span>
         <span class="labels-row__label">Куди відправлено</span>
