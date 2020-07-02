@@ -175,6 +175,7 @@ function getListUsersNames()
     $names = getUsersName("OR");
     return $names;
 }
+
 //===add task
 if (isset($_POST['addTask'])):
     $val = false;
@@ -213,7 +214,7 @@ if (isset($_POST['addTask'])):
         $data = array(
             'letter_num-moz' => $task_num_moz,
             'letter_num-ascod' => $task_num_askod,
-            'letter_num-departament' =>  $task_num_department,
+            'letter_num-departament' => $task_num_department,
             'title' => $_POST['task__title'],
             'performers_departament' => $department_perfomance,
             'description' => $desc,
@@ -238,14 +239,31 @@ if (isset($_POST['addTask'])):
         echo "zero";
     endif;
 endif;
-//===end task
+//===end add task
 function getTaskForUser($like)
 {
     $tasks = getArrTasksForUser($like);
     return $tasks;
 }
-function getUsers($str){
+
+function getTasksForKanc($role)
+{
+    if ($role == 1):
+        $tasks = getTasksForManagers();
+        return $tasks;
+    endif;
+}
+
+function getUsers($str)
+{
     $ar = explode(",", $str);
     $rezult = getUsersList($ar);
     return $rezult;
 }
+
+if ((isset($_POST['search-start-date']) === false) and (isset($_POST['search-end-date']) === false)):
+    return false;
+else:
+    $q = getSearchBeforeDate($_POST['search-end-date']);
+    return $q;
+endif;

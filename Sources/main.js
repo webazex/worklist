@@ -252,4 +252,25 @@ $(document).ready(function () {
         });
         $('.tasks-list').html(html);
     });
+    $('#subDateStart').click(function () {
+        event.preventDefault();
+        $.ajax({
+            url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+            type: "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+            success: function (response) { //Данные отправлены успешно
+                // console.log($.parseJSON(response));
+                if (response === "error") {
+                   alert("Вкажіть хоча б одну дату.");
+                } else {
+                    return response;
+                }
+            },
+            error: function (response) { // Данные не отправлены
+                console.log("don't send");
+            }
+        });
+
+    });
 });

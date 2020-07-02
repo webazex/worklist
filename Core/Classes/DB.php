@@ -1,4 +1,5 @@
 <?php
+
 namespace Core\Classes;
 ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
@@ -21,7 +22,7 @@ class DB
     static function db_connect()
     {
         mysqli_report(MYSQLI_REPORT_ERROR | MYSQLI_REPORT_STRICT);
-       $mysqli = new \mysqli('localhost:3307', 'webazex', 'Webazex*01!', 'task');
+        $mysqli = new \mysqli('localhost:3307', 'webazex', 'Webazex*01!', 'task');
 //         $mysqli = new \mysqli('134.249.158.47', 'root', '', 'task');
         return $mysqli;
     }
@@ -63,7 +64,7 @@ class DB
                     array_push($arRezult, $row);
                 endwhile;
                 $return->close();
-                return print_r($arRezult);
+                return $arRezult;
             endif;
         endif;
     }
@@ -126,14 +127,16 @@ class DB
             endif;
         endif;
     }
-    static function db_get_custom_fields_with_filters($relation){
+
+    static function db_get_custom_fields_with_filters($relation)
+    {
         $status = self::db_status();
         if ($status == false):
             throw new \Exception('Немає з’єднання з базою данних!');
         else:
             $bd = self::db_connect();
 //            $bd->real_query("SELECT " . $fields . " FROM " . "`" . $table_name . "` WHERE `" . $query);
-        $bd->real_query("SELECT `id`, `fio` FROM `users` WHERE `role` = 0 ".$relation." `role` = 1");
+            $bd->real_query("SELECT `id`, `fio` FROM `users` WHERE `role` = 0 " . $relation . " `role` = 1");
             if ($return = $bd->use_result()):
                 $arRezult = array();
                 while ($row = $return->fetch_row()):
@@ -146,6 +149,7 @@ class DB
             endif;
         endif;
     }
+
     static function db_add_in_table($table_name, $arr)
     {
         $status = self::db_status();
@@ -158,7 +162,7 @@ class DB
             $arfields = array();
             $arvalues = array();
             foreach ($arr as $f => $v):
-                $f = "`".$f."`";
+                $f = "`" . $f . "`";
                 array_push($arfields, $f);
                 $v = "'" . $v . "'";
                 array_push($arvalues, $v);
@@ -182,7 +186,8 @@ class DB
         endif;
     }
 
-    static function db_select_in_table($table_name, $fields)  {
+    static function db_select_in_table($table_name, $fields)
+    {
         $status = self::db_status();
         if ($status == false):
             throw new \Exception('Немає з’єднання з базою данних!');
@@ -273,16 +278,18 @@ class DB
             endif;
         endif;
     }
-    static function db_select_in_user_table($l, $p, $r){
+
+    static function db_select_in_user_table($l, $p, $r)
+    {
         $status = self::db_status();
         if ($status == false):
             throw new \Exception('Немає з’єднання з базою данних!');
         else:
             $bd = self::db_connect();
-            $l =  mysqli_real_escape_string($bd, $l);
-            $p =  mysqli_real_escape_string($bd, $p);
-            $r =  mysqli_real_escape_string($bd, $r);
-            $bd->real_query("SELECT `id`, `fio`, `login`, `role` FROM `users` WHERE `login` = '".$l."' AND `passw` = '".$p."' AND `role` = '".$r."' ");
+            $l = mysqli_real_escape_string($bd, $l);
+            $p = mysqli_real_escape_string($bd, $p);
+            $r = mysqli_real_escape_string($bd, $r);
+            $bd->real_query("SELECT `id`, `fio`, `login`, `role` FROM `users` WHERE `login` = '" . $l . "' AND `passw` = '" . $p . "' AND `role` = '" . $r . "' ");
             if ($return = $bd->use_result()):
                 $arRezult = array();
                 while ($row = $return->fetch_row()):
@@ -293,15 +300,17 @@ class DB
             endif;
         endif;
     }
-    static function db_get_rows_for_user($like){
+
+    static function db_get_rows_for_user($like)
+    {
         $status = self::db_status();
         if ($status == false):
             throw new \Exception('Немає з’єднання з базою данних!');
         else:
             $bd = self::db_connect();
-            $l =  mysqli_real_escape_string($bd, $like);
-            $s = '\"'.$l.'\"';
-            $bd->real_query("SELECT * FROM `tasks` WHERE `performers` REGEXP '".$s."'");
+            $l = mysqli_real_escape_string($bd, $like);
+            $s = '\"' . $l . '\"';
+            $bd->real_query("SELECT * FROM `tasks` WHERE `performers` REGEXP '" . $s . "'");
             if ($return = $bd->use_result()):
                 $arRezult = array();
                 while ($row = $return->fetch_row()):
@@ -312,15 +321,18 @@ class DB
             endif;
         endif;
     }
-    static function db_get_users($ids){
+
+
+    static function db_get_users($ids)
+    {
         $status = self::db_status();
         if ($status == false):
             throw new \Exception('Немає з’єднання з базою данних!');
         else:
             $bd = self::db_connect();
-           $arRezult = array();
+            $arRezult = array();
             foreach ($ids as $id):
-                $bd->real_query("SELECT `fio` FROM `users` WHERE `id` LIKE  ".$id);
+                $bd->real_query("SELECT `fio` FROM `users` WHERE `id` LIKE  " . $id);
                 $ret = $bd->use_result();
                 while ($row = $ret->fetch_row()):
                     array_push($arRezult, $row[0]);
@@ -329,7 +341,61 @@ class DB
             return $arRezult;
         endif;
     }
+
+//    ====search-start
+    static function db_search_interval_date($date_start, $date_limit)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_start` >= '" . $date_start . "' AND `date_start` <= '" . $date_limit . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
+
+    static function db_search_start_interval_date($date_start)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_start` >= '" . $date_start . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
+
+    static function db_search_end_interval_date($date_limit)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_start` <= '" . $date_limit . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
 }
+//=========end=search==================
+//поиск от и до включительно SELECT * FROM `tasks` WHERE `date_start` >= '2020-06-20' AND `date_start` <= '2020-06-26'
 // по возрастанию SELECT * FROM `tasks` ORDER BY `tasks`.`letter_num-moz` ASC
 //по убыванию SELECT * FROM `tasks` ORDER BY `tasks`.`letter_num-moz` DESC
 // ====for=test====
@@ -346,6 +412,7 @@ if (!empty($_POST)):
 //$q = $data::db_select_in_user_table('webazex', '12345', 3);
 //$ar = array(20, 19, 2);
 //    $q = $data::db_get_users($ar);
+//$q = $data::db_search_end_interval_date('2020-06-20');
 //echo('<pre>');
 //print_r($q);
 //echo('</pre>');
@@ -385,5 +452,7 @@ if (!empty($_POST)):
 //    $q = $data::db_get_rows_for_user($_POST['test']);
 //    print_r($q);
 //$q = $data::db_get_users($arr = array(1, 2, 3, 19, 21, 22));
+//print_r($q);
+//$q = $data::db_search_end_interval_date('2020-06-20');
 //print_r($q);
 endif;

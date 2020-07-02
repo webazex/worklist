@@ -7,7 +7,10 @@ foreach ($users as $user):
 endforeach;
 $key_for_hidden = mt_rand(3, 6);
 $rows = '';
-$tasks = getTaskForUser($_SESSION['id']);
+//$tasks = getTaskForUser($_SESSION['id']);
+$id = 'user_'.$_SESSION['id'];
+$tasks = getTasksForKanc($_SESSION[$id]['role']);
+
 $strId = "";
 if (empty($tasks)):
     echo "zero-t";
@@ -112,18 +115,31 @@ else:
 </button>
 </div>
             </div>
-            
+            <form action="" id="sDateEnd" method="post">
             <input type="date" name="search-start-date">
             <input type="date" name="search-end-date">
+            <button type="submit" id="subDateStart" name="searchDateStart">
+            <span></span>
+            </button>
+            <button type="button" id="clearDateStart">
+            <span></span>
+            </button>
+            </form>
         </div>
         </div>
         <div class="labels-row__label">
         <span class="label__text">Тема</span>
+        <form action="" id="sTheme" method="post">
         <input type="search" name="search-theme">
+        <button type="submit" id="subTheme">
+            <span></span>
+            </button>
+        </form>
         </div>
         <div class="labels-row__label numbers">
         <div class="label__block-moz">
         <span class="labels-row__label">Номер вхідного по МОЗ</span>
+        <form id="sNumbers" method="post" action="">
         <input type="search" name="search-moz">
 </div>
         <div class="label__block-ascod">
@@ -132,16 +148,31 @@ else:
 </div>
         <div class="label__block-department">
         <span class="labels-row__label">Номер вхідного по Департаменту</span>
-        <input type="search" name="search-department">
+        <form action="" id="sDepartment" method="post">
+        <input type="search" name="search-department"></form>
+        <button type="submit" id="subNumbers">
+            <span></span>
+            </button>
+        </form>
 </div>
 </div>       
         <div class="labels-row__label">
         <span class="label__text">Виконавці по департаменту</span>
+        <form action="" id="sDepartmentPerfomance" method="post">
         <input type="search" name="search-department-perfomance">
+        <button type="submit" id="subDepPerfomance">
+            <span></span>
+            </button>
+        </form>
         </div>
         <div class="labels-row__label">
         <span class="label__text">Виконавці(-ець)</span>
-        <input type="search" name="search-department-perfomance">
+        <form action="" id="sPerfomance" method="post">
+        <input type="search" name="search-perfomance">
+        <button type="submit" id="subPerfomance">
+            <span></span>
+            </button>
+        </form>
         </div>
         <div class="labels-row__label">
             <div class="label__text">
@@ -160,9 +191,14 @@ else:
 </button>
 </div>
             </div>
-            
-            <input type="date" name="search-start-date-e">
+            <form action="" id="sDateEnd" method="post">
+             <input type="date" name="search-start-date-e">
             <input type="date" name="search-end-date-e">
+            <button type="submit" id="subDateEnd">
+            <span></span>
+            </button>
+</form>
+           
         </div>
         <span class="labels-row__label">Відправник</span>
         <span class="labels-row__label">Куди відправлено</span>
