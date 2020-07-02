@@ -10,7 +10,6 @@ $rows = '';
 //$tasks = getTaskForUser($_SESSION['id']);
 $id = 'user_'.$_SESSION['id'];
 $tasks = getTasksForKanc($_SESSION[$id]['role']);
-
 $strId = "";
 if (empty($tasks)):
     echo "zero-t";
@@ -121,7 +120,7 @@ else:
             <button type="submit" id="subDateStart" name="searchDateStart">
             <span></span>
             </button>
-            <button type="button" id="clearDateStart">
+            <button type="button" id="clearDateStart" name="clearDateStart">
             <span></span>
             </button>
             </form>

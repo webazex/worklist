@@ -264,6 +264,42 @@ function getUsers($str)
 if ((isset($_POST['search-start-date']) === false) and (isset($_POST['search-end-date']) === false)):
     return false;
 else:
-    $q = getSearchBeforeDate($_POST['search-end-date']);
-    return $q;
+    $tasks = getSearchBeforeDate($_POST['search-end-date']);
+    $rows = '';
+    foreach ($tasks as $task):
+        $ar = explode(",", $task[11]);
+        $arIds = array();
+        foreach ($ar as $a):
+            $a = preg_replace("/\"/", " ", $a);
+            array_push($arIds, $a);
+        endforeach;
+        $performersList = getUsersList($arIds);
+        $names = implode(", ", $performersList);
+        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="tId-' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+<input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '">
+        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '" readonly="readonly">
+        <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '" readonly="readonly">
+        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '" readonly="readonly">
+        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '" readonly="readonly">
+        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '" readonly="readonly">
+        <input class="row__col-task-performers" type="text" name="performers" value="' . $names . '" readonly="readonly">
+        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
+        <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
+        <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
+
+        
+       <select class="row__col-status"  name="status">
+       <option selected="selected" value="0"<span>В роботі</span></option>
+       <option value="1"><span>Виконано</span></option>
+</select>
+        <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
+
+        <div class="row__btns-row">
+        <button type="submit" name="edittask" id="edit_task">Зберегти зміни</button>
+        <button type="reset" class="reset-btn">Відміна</button>
+</div>
+        
+    </form>';
+echo $rows;
+    endforeach;
 endif;

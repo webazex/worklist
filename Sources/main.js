@@ -264,8 +264,26 @@ $(document).ready(function () {
                 if (response === "error") {
                    alert("Вкажіть хоча б одну дату.");
                 } else {
-                    return response;
+                    $('.tasks-list').empty();
+                    $('.tasks-list').append(response);
                 }
+            },
+            error: function (response) { // Данные не отправлены
+                console.log("don't send");
+            }
+        });
+
+    });
+    $('#clearDateStart').click(function () {
+        event.preventDefault();
+        $.ajax({
+            url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+            type: "POST", //метод отправки
+            dataType: "html", //формат данных
+            data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+            success: function (response) { //Данные отправлены успешно
+                    $('.tasks-list').empty();
+                    $('.tasks-list').append(response);
             },
             error: function (response) { // Данные не отправлены
                 console.log("don't send");
