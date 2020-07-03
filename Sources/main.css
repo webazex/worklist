@@ -213,7 +213,7 @@ h2 {font-size: 1.5rem;}
 }
 .tabs-rows__item {
     width: 200px;
-    border: 1px solid black;
+    /*border: 1px solid black;*/
     display: flex;
     justify-content: center;
     align-items: center;
@@ -343,6 +343,14 @@ h2 {font-size: 1.5rem;}
 .labels-row__label form  input {
     width: 100%;
 }
+.row__btns-row button{
+    background-color: white;
+    border: 1px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    padding: 3px;
+
+}
 .labels-row__label form button {
     width: 91px;
     height: 35px;
@@ -351,8 +359,10 @@ h2 {font-size: 1.5rem;}
     border: 1px solid #77a89c;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 5px;
+    outline-color: #77a89c;
 
 }
+
 .label__text {
     position: relative;
     display: flex;
@@ -365,6 +375,29 @@ h2 {font-size: 1.5rem;}
     font-weight: bold;
     text-align: left;
     
+}
+.select-status {
+    width: 101px;
+    height: 35px;
+    margin-top: 7px;
+    background-color: white;
+    border: 1px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    outline-color: #77a89c;
+}
+.select-status option {
+    background: transparent;
+}
+.label__block-department button{
+    width: 78px;
+    height: 25px;
+    margin-top: 7px;
+    background-color: white;
+    border: 1px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+}
 }
 .label__data-block-label input {width: 100%;}
 .text__row{
@@ -423,9 +456,10 @@ h2 {font-size: 1.5rem;}
             "desc desc desc desc desc desc desc desc desc"
             "attach attach attach attach attach attach attach attach attach";
 
-    padding: 5px;
-    border: 1px solid black;
-    margin: 10px 0;
+    padding: 3px;
+    /*border: 1px solid black;*/
+    margin: 15px 0;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 20px 0 rgba(0,0,0,0.19);
 }
 .row__col-date-start, .row__col-task-ascod, .row__col-task-moz, .row__col-task-departament, .row__col-performers,
 .row__col-date-end, .row__col-sender, .row__col-receiver, .row__col-status {
@@ -433,7 +467,8 @@ h2 {font-size: 1.5rem;}
     display: flex;
     justify-content: center;
 }
-
+.attach-row__link span {color: lightgrey; font-size: 14px;}
+.numbers-task {grid-area: numbers;}
 .row__col-date-start{grid-area: date-start;}
 .row__col-task-moz {grid-area: number-moz;}
 .row__col-task-ascod {grid-area: number-ascod;}
@@ -444,7 +479,10 @@ h2 {font-size: 1.5rem;}
 .row__col-sender {grid-area: sender;}
 .row__col-receiver {grid-area: receiver;}
 .row__col-status {grid-area: status;}
-.row__desc-row {grid-area: desc;}
+.row__desc-row {
+    margin: 10px 0;
+    grid-area: desc;}
+.row__attach-row {grid-area: attach;}
 .rezult {
     max-width: 540px;
     width: 100%;

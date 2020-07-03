@@ -7,13 +7,17 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-$dir = "/";
+$dir = "/volume1/attaches/";
+$scan = scandir($dir.'/2/');
+print_r($scan);
+echo('<hr>');
 
+echo __FILE__.'<br>';
 // Открыть заведомо существующий каталог и начать считывать его содержимое
 if (is_dir($dir)) {
     if ($dh = opendir($dir)) {
         while (($file = readdir($dh)) !== false) {
-            print "Файл: $file : тип: " . filetype($dir . $file) . "\n";
+            print "Файл: $file : тип: " . filetype($dir . $file) . ".'<br>'";
         }
         closedir($dh);
     }

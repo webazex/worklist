@@ -211,6 +211,9 @@ if (isset($_POST['addTask'])):
             array_push($arrUsersId, $item);
         endforeach;
         $users = implode(",", $arrUsersId);
+        $folder_name = uniqid('t');
+        $path = '/volume1/attaches/'.$folder_name;
+        mkdir($path);
         $data = array(
             'letter_num-moz' => $task_num_moz,
             'letter_num-ascod' => $task_num_askod,
@@ -223,7 +226,8 @@ if (isset($_POST['addTask'])):
             'sender' => "",
             'recipient' => "",
             'performers' => $users,
-            'status' => "В роботі"
+            'status' => "В роботі",
+            'folder' => $folder_name
         );
         $send = implode(" ", $_POST['users']);
         $val = true;
@@ -260,11 +264,7 @@ function getUsers($str)
     $rezult = getUsersList($ar);
     return $rezult;
 }
-
-if ((isset($_POST['search-start-date']) === false) and (isset($_POST['search-end-date']) === false)):
-    return false;
-else:
-    $tasks = getSearchBeforeDate($_POST['search-end-date']);
+function renderTaskList($tasks){
     $rows = '';
     foreach ($tasks as $task):
         $ar = explode(",", $task[11]);
@@ -300,6 +300,12 @@ else:
 </div>
         
     </form>';
-echo $rows;
+        echo $rows;
     endforeach;
+}
+if ((isset($_POST['search-start-date']) === false) and (isset($_POST['search-end-date']) === false)):
+    return false;
+else:
+    $tasks = getSearchBeforeDate($_POST['search-end-date']);
+    renderTaskList($tasks);
 endif;
