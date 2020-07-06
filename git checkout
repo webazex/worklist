@@ -1,0 +1,67 @@
+[33mcommit e100460a12f1eebeaa3b03035335eeb7a8c44e3e[m[33m ([m[1;36mHEAD -> [m[1;32mwebazex[m[33m, [m[1;31morigin/webazex[m[33m)[m
+Author: Webazex <webazex@gmail.com>
+Date:   Fri Jul 3 17:18:35 2020 +0300
+
+    add create folder for task and generate folder-name
+
+[33mcommit 774dc535b82c3f92a257158388b921ac2b81015d[m
+Author: Webazex <webazex@gmail.com>
+Date:   Thu Jul 2 16:04:15 2020 +0300
+
+    add views ajax-search for date
+
+[33mcommit b65d8e33cdd607ece6c47ea88957cbe8b6c68c09[m
+Author: Webazex <webazex@gmail.com>
+Date:   Thu Jul 2 12:01:43 2020 +0300
+
+    fix views tasks for kanc and add search query for date-start
+
+[33mcommit 5ec7c4942c4b8aa60d1c50d18da8a30e7f1ba26d[m
+Author: Webazex <webazex@gmail.com>
+Date:   Wed Jul 1 16:40:14 2020 +0300
+
+    add sortable for date
+
+[33mcommit 59cf8eca6677b05a6e89b79f59d9941bdbbc2e92[m
+Author: Webazex <webazex@gmail.com>
+Date:   Wed Jul 1 10:55:12 2020 +0300
+
+    edit tables in bd and frontend for managers
+
+[33mcommit b129e6278c19c26cd5c8680f3ba91413429a6d08[m
+Author: Webazex <webazex@gmail.com>
+Date:   Wed Jun 24 12:28:24 2020 +0300
+
+    wtf
+
+[33mcommit 4870f202e48df7053d5f5e768a7bb299f17478bd[m
+Author: webazex <40128990+webazex@users.noreply.github.com>
+Date:   Wed Jun 24 12:27:19 2020 +0300
+
+    Create gitignore
+
+[33mcommit 9e01eef33d4af03bd323c51d7991e598badb4d27[m
+Author: Webazex <webazex@gmail.com>
+Date:   Wed Jun 24 12:20:36 2020 +0300
+
+    add create manager.phtml
+
+[33mcommit 67a5de77dbe95b50c6b088fb1b7e860b735b2608[m[33m ([m[1;31morigin/master[m[33m, [m[1;31morigin/HEAD[m[33m, [m[1;32mmaster[m[33m)[m
+Author: Webazex <webazex@gmail.com>
+Date:   Wed Jun 24 12:06:55 2020 +0300
+
+    add htaccess
+
+[33mcommit cb78af3fb71fe3a44e3a2f5280c5a35e8ac39bc4[m
+Author: webazex <40128990+webazex@users.noreply.github.com>
+Date:   Wed Jun 24 11:06:23 2020 +0300
+
+    first-commit
+    
+    Created login and auth, routings, create tasks, select tasks for user
+
+[33mcommit 7c0d45eddd86577ddf2e79c0869210994354efb8[m
+Author: webazex <40128990+webazex@users.noreply.github.com>
+Date:   Wed Jun 24 11:03:37 2020 +0300
+
+    Initial commit

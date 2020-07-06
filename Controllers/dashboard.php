@@ -214,6 +214,12 @@ if (isset($_POST['addTask'])):
         $folder_name = uniqid('t');
         $path = '/volume1/attaches/'.$folder_name;
         mkdir($path);
+        foreach ($_FILES["task__attach"]['tmp_name'] as $k => $tmpFilePath):
+            $tmp_name = $_FILES["task__attach"]["tmp_name"][$k];
+            $name = $_FILES["task__attach"]["name"][$k];
+            move_uploaded_file($tmpFilePath, $path.'/'.$name);
+//            rename($_FILES["task__attach"]['name'][$k], $path.'/'.$_FILES["task__attach"]['name'][$k]);
+        endforeach;
         $data = array(
             'letter_num-moz' => $task_num_moz,
             'letter_num-ascod' => $task_num_askod,

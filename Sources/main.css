@@ -245,6 +245,15 @@ h2 {font-size: 1.5rem;}
 .item__user-name {
     margin-left: 20px;
 }
+.task-num-file {grid-area: attach;}
+.task-num-file::after{
+    content: 'Не більше 128 Мб';
+    color: orangered;
+    text-align: center;
+    margin-left: 120px;
+    font-size: 14px;
+}
+.task-num-file #file-upload-button {color: red;}
 .content__form {
     width: 100%;
     display: grid;
@@ -253,7 +262,8 @@ h2 {font-size: 1.5rem;}
             "task-number-ascod task-number-department task-number-moz"
             "date-start date-end title"
             "department-perfomance department-perfomance department-perfomance"
-            "desc desc desc";
+            "desc desc desc"
+            "attach attach attach";
     grid-gap: 15px;
     order: 0;
 }
@@ -367,7 +377,7 @@ h2 {font-size: 1.5rem;}
     position: relative;
     display: flex;
     justify-content: space-between;
-    align-items: left;
+    align-items: flex-start;
     /*height: 25px;*/
     width: 100%;
     flex-direction: column;
@@ -397,7 +407,6 @@ h2 {font-size: 1.5rem;}
     border: 1px solid #77a89c;
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 5px;
-}
 }
 .label__data-block-label input {width: 100%;}
 .text__row{

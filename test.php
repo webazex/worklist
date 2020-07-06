@@ -7,9 +7,16 @@ ini_set('error_reporting', E_ALL);
 ini_set('display_errors', 1);
 ini_set('display_startup_errors', 1);
 
-$dir = "/volume1/attaches/";
-$scan = scandir($dir.'/2/');
-print_r($scan);
+//$dir = "/volume1/attaches/";
+//$scan = scandir($dir.'/2/');
+//print_r($scan);
+$list = array(
+        'економічний (econom.med.ks@ukr.net)', 'асу (medstat-kherson@ukr.net)',
+        'технічний відділ (to-oz@ukr.net)', 'Левко (medstat-centr@ukr.net)',
+        'Курдіна (tanya.kurdina@ukr.net)', 'ЕОЗ (e-health@ukr.net)',
+    'Канцелярія (kanc-medstat@ukr.net)'
+);
+//економічний (econom.med.ks@ukr.net), асу (medstat-kherson@ukr.net), технічний відділ (to-oz@ukr.net), Левко (medstat-centr@ukr.net), Курдіна (tanya.kurdina@ukr.net), ЕОЗ (e-health@ukr.net), Канцелярія (kanc-medstat@ukr.net)
 echo('<hr>');
 
 echo __FILE__.'<br>';

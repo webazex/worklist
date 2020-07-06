@@ -158,35 +158,46 @@ $(document).ready(function () {
     function addTask(){
 
     }
+    var files = [];
+    $('input[type=file]').change(function(){
+        files = (this.files);
+    });
     $('#task_submit').click(function () {
         event.preventDefault();
+        var data = [];
+        // data[0] = $('#newTaskForm').serializeArray();
+        var form = document.forms.newTaskForm;
+            console.log(form);
+        data = new FormData(form);
+        $.each( files, function( key, value ){
+            data.append( key, value );
+        });
+        console.log(data);
         if(($('.task-num-departament').val() === "") & ($('.task-num-askod').val() === "") & ($('.task-num-moz').val() === "")){
             alert("Помилка, потрібно вказати хоча б один номер листа");
         }else {
-            $.ajax({
-                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
-                type: "POST", //метод отправки
-                dataType: "html", //формат данных
-                data: $('#newTaskForm').serializeArray(),  // Сеарилизуем объект
-                success: function (response) { //Данные отправлены успешно
-                    if (response === "ok") {
-                        $('#callback').html('<span class="info-alert">Задачу поставлено успішно</span>');
-                    } else if (response === "zero") {
-                        $('#callback').html('<span class="red-alert">Не проставлені виконавці</span>');
-                    } else {
-                        $('#callback').html('<span class="red-alert">Виникла помилка під час постановки задачі. Задачу не поставлено.</span>');
-                    }
 
-                    function clearCallback() {
-                        $('#callback').empty();
+            var form = document.forms.newTaskForm;
+            var formData = new FormData(form);
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "/Controllers/dashboard.php");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState == 4) {
+                    if(xhr.status == 200) {
+                        data = xhr.responseText;
+                        console.log(data);
+                        if(data == "true") {
+                            // $(".sending").replaceWith("<p>Принято!<p>");
+                            alert("ok");
+                        } else {
+                            // $(".sending").replaceWith("<p >Ошибка! Обновите страницу...<p>");
+                            alert("ne ok");
+                        }
                     }
-
-                    setTimeout(clearCallback, 3000);
-                },
-                error: function (response) { // Данные не отправлены
-                    console.log("don't send");
                 }
-            });
+            };
+            xhr.send(formData);
+
         }
     });
     $('.text__row').click(function () {
@@ -235,12 +246,14 @@ $(document).ready(function () {
         $('.tasks-list').html(html);
     });
     $('#subDateStart').click(function () {
+        // event.stopPropagation();
         event.preventDefault();
         $.ajax({
             url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
             type: "POST", //метод отправки
             dataType: "html", //формат данных
             data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+            // data: data,
             success: function (response) { //Данные отправлены успешно
                 // console.log($.parseJSON(response));
                 if (response === "error") {

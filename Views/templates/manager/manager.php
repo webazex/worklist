@@ -26,7 +26,7 @@ if (empty($tasks)):
     </div>
     <div class="tabs__section-container">
         <div class="section-container__tabs-section" data-id="1">
-            <form class="tabs-section__new-task-form" id="newTaskForm" method="post" action="">
+            <form class="tabs-section__new-task-form" id="newTaskForm" method="post" action="" enctype="multipart/form-data">
                 <div class="new-task-form__content">
                     <div class="content__list-users">
                     <h3>Вкажіть виконавця(-ів):</h3>
@@ -41,7 +41,7 @@ if (empty($tasks)):
 <input type="text" name="task_num-departament" class="task-num-departament"  placeholder="Вкажіть номер вхідного листа по департаменту">
 <input type="text" name="task_num-askod" class="task-num-askod" placeholder="Вкажіть номер вхідного листа по ASCOD">
 <input type="text" name="task_num-moz" class="task-num-moz"  placeholder="Вкажіть номер вхідного листа по МОЗ">
-<label class="task-theme"><span>Вкажіть тему вхідного листа</span><input type="text" name="task__title" class="task-title" required="required"  placeholder="Не обов’язково"></label>
+<label class="task-theme"><span>Вкажіть тему вхідного листа</span><input type="text" name="task__title" class="task-title"  placeholder="Не обов’язково"></label>
 <label class="date-start"><span>Дата постановки задачі</span>
     <input type="date" name="date-start"  required="required" min="" max="">
 </label>
@@ -51,6 +51,7 @@ if (empty($tasks)):
 
 <textarea name="department-perfomance" class="department-perfomance" placeholder="Вкажіть виконавців департаменту (якщо потрібно)"></textarea>
 <textarea name="task__desc" class="textarea" placeholder="Вкажіть деталі вхідного листа (якщо потрібно)"></textarea>
+<input type="file" name="task__attach[]" class="task-num-file" multiple="multiple">
 <input type="hidden" name="addTask" value="' . $key_for_hidden . '">
                 </div>
                 </div>
@@ -90,7 +91,7 @@ else:
 </select>
         <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
         <div class="row__attach-row">
-        <a href="'.$folder.'" class="attach-row__link"><span>'.$folder.'</span></a>
+        <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>'.$folder.'</span></a>
         <span class="attach-row__status-attach">Yes \ No</span>
 </div>
         <div class="row__btns-row">
@@ -115,7 +116,7 @@ else:
     </div>
     <div class="tabs__section-container">
         <div class="section-container__tabs-section" data-id="1">
-            <form class="tabs-section__new-task-form" id="newTaskForm" method="post" action="">
+            <form class="tabs-section__new-task-form" id="newTaskForm" method="post" action="" enctype="multipart/form-data">
                 <div class="new-task-form__content">
                     <div class="content__list-users">
                     <h3>Вкажіть виконавця(-ів):</h3>
@@ -140,6 +141,7 @@ else:
 
 <textarea name="department-perfomance" class="department-perfomance" placeholder="Вкажіть виконавців департаменту (якщо потрібно)"></textarea>
 <textarea name="task__desc" class="textarea" placeholder="Вкажіть деталі вхідного листа (якщо потрібно)"></textarea>
+<input type="file" name="task__attach[]" class="task-num-file" multiple="multiple" placeholder="Додайте файли (при необхідності)"></input>
 <input type="hidden" name="addTask" value="' . $key_for_hidden . '">
                 </div>
                 </div>
