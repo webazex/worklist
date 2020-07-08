@@ -363,4 +363,35 @@ $(document).ready(function () {
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });
+
+    // ===ajax search performers
+    $('#subPerfomance').click(function () {
+        event.preventDefault();
+        if(($('.search-performers').val() == "default")){
+            alert("Оберіть виконавця.");
+        } else {
+            $.ajax({
+                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $('#sPerfomance').serializeArray(),  // Сеарилизуем объект
+                success: function (response) { //Данные отправлены успешно
+                    if (response === "error") {
+                        alert("Оберіть виконавця.");
+                    } else {
+                        $('.tasks-list').empty();
+                        $('.tasks-list').append(response);
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    console.log("don't send");
+                }
+            });
+        }
+    });
+    $('#resPerfomance').click(function () {
+        $('#sPerfomance')[0].reset();
+        $('.tasks-list').empty();
+        $('.tasks-list').append(managerContent);
+    });
 });

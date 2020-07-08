@@ -423,6 +423,21 @@ class DB
             endif;
             return $arRezult;
     }
+    static function db_search_performers($value){
+        $status = self::db_status();
+        if($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `performers` LIKE '%".$value."%'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
 }
 //=========end=search==================
 //поиск от и до включительно SELECT * FROM `tasks` WHERE `date_start` >= '2020-06-20' AND `date_start` <= '2020-06-26'

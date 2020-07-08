@@ -2,9 +2,11 @@
 //echo "22";
 $users = getListUsersNames();
 $list = '';
+$options = '';
 foreach ($users as $user):
     $list .= '<li class="list__item">
     <input type="checkbox" name="users[]" value="' . $user[0] . '"><span class="item__user-name">' . $user[1] . '</span></li>';
+    $options .= '<option value="' .$user[0].'" <span>'.$user[1].'</span></option>';
 endforeach;
 $key_for_hidden = mt_rand(3, 6);
 $rows = '';
@@ -217,7 +219,7 @@ else:
         <div class="labels-row__label">
         <span class="label__text">Виконавці по департаменту</span>
         <form action="" id="sDepartmentPerfomance" method="post">
-        <input type="search" name="search-department-perfomance">
+       <input type="search" name="search-department-perfomance">
         <button type="submit" id="subDepPerfomance">
             <span>Пошук</span>
             </button>
@@ -229,7 +231,9 @@ else:
         <div class="labels-row__label">
         <span class="label__text">Виконавці(-ець)</span>
         <form action="" id="sPerfomance" method="post">
-        <input type="search" name="search-perfomance">
+        <select class="search-performers" name="search-performers">
+        <option default value="default"><span>Оберіть виконавця</span></option>'.$options.'
+</select>
         <button type="submit" id="subPerfomance">
             <span>Пошук</span>
             </button>

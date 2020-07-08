@@ -270,7 +270,7 @@ function getUsers($str)
     return $rezult;
 }
 
-function renderTaskList($tasks)
+function renderManagerTaskList($tasks)
 {
     $rows = '';
     foreach ($tasks as $task):
@@ -321,22 +321,19 @@ if ((empty($_POST['search-start-date']) and empty($_POST['search-end-date']))):
 
 else:
     if (($_POST['search-start-date'] !== "" and ($_POST['search-end-date'] !== ""))):
-        echo "interval";
         $tasks = getSearchIntervalDate($_POST['search-start-date'], $_POST['search-end-date']);
     endif;
     if ($_POST['search-start-date'] == ""):
         if ($_POST['search-end-date'] !== ""):
-            echo "do";
             $tasks = getSearchBeforeDate($_POST['search-end-date']);
         endif;
     endif;
     if ($_POST['search-end-date'] == ""):
         if ($_POST['search-start-date'] !== ""):
-            echo "posle";
             $tasks = getSearchAfterDate($_POST['search-start-date']);
         endif;
     endif;
-    renderTaskList($tasks);
+    renderManagerTaskList($tasks);
 endif;
 
 //search title
@@ -344,7 +341,7 @@ if (empty($_POST['search-theme'])):
 
 else:
     $tasks = getSearchTitle($_POST['search-theme']);
-    renderTaskList($tasks);
+    renderManagerTaskList($tasks);
 endif;
 //=====search for numbers tasks
 if ((empty($_POST['search-moz']) and empty($_POST['search-ascod']) and empty($_POST['search-department']))):
@@ -367,5 +364,14 @@ else:
             $tasks = getSearchNumbers($field, $v);
         endif;
     endforeach;
-    renderTaskList($tasks);
+    renderManagerTaskList($tasks);
+endif;
+
+//===search for performers
+if (empty($_POST['search-performers'])):
+    else:
+    if ($_POST['search-performers'] !== "default"):
+        $tasks = getSearchPerformers($_POST['search-performers']);
+        renderManagerTaskList($tasks);
+    endif;
 endif;
