@@ -91,7 +91,7 @@ else:
 </select>
         <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
         <div class="row__attach-row">
-        <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>'.$folder.'</span></a>
+        <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>Вкладення</span></a>
         <span class="attach-row__status-attach">Yes \ No</span>
 </div>
         <div class="row__btns-row">

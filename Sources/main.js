@@ -123,8 +123,8 @@ $(document).ready(function () {
         let thisEL = $(this);
         let defaultBorderColor = thisEL.css('border-color');
         let defaultTextColor = thisEL.children('span').css('color');
-        thisEL.css({'border-color':'green'});
-        thisEL.children('span').css({'color':'green'});
+        thisEL.css({'border-color':'#77a89c'});
+        thisEL.children('span').css({'color':'#77a89c'});
         let TabsContainer = parentEl.children('.tabs__tabs-rows');
         let tabs = TabsContainer.children('.tabs-rows__item');
         let NotThisTab = tabs.not(this);
@@ -172,7 +172,6 @@ $(document).ready(function () {
         $.each( files, function( key, value ){
             data.append( key, value );
         });
-        console.log(data);
         if(($('.task-num-departament').val() === "") & ($('.task-num-askod').val() === "") & ($('.task-num-moz').val() === "")){
             alert("Помилка, потрібно вказати хоча б один номер листа");
         }else {
@@ -185,19 +184,21 @@ $(document).ready(function () {
                 if (xhr.readyState == 4) {
                     if(xhr.status == 200) {
                         data = xhr.responseText;
-                        console.log(data);
-                        if(data == "true") {
-                            // $(".sending").replaceWith("<p>Принято!<p>");
-                            alert("ok");
-                        } else {
-                            // $(".sending").replaceWith("<p >Ошибка! Обновите страницу...<p>");
-                            alert("ne ok");
+                        if(data == "ok") {
+                            $('#callback').html('<p class="info-alert"><span>Задачу успішно поставлено</span></p>');
+                        } else if(data == "false"){
+                            $('#callback').html('<p class="red-alert"><span>Задачу не створено.</span></p>');
+                        } else if(data == "zero") {
+                            $('#callback').html('<p class="red-alert"><span>Відсутні вхідні данні. Працюємо над виправленням.</span></p>');
                         }
                     }
                 }
             };
             xhr.send(formData);
-
+            function clearCallback(){
+                $('#callback').html('')
+            }
+            setInterval( clearCallback, 5000);
         }
     });
     $('.text__row').click(function () {
@@ -216,6 +217,7 @@ $(document).ready(function () {
     $('#start-date-asc').click(function() {
         let html = $('.table__row').sort(function (a, b) {
             let sortA = $(a).data('date-start');
+            let sortB = $(b).data('date-start');
             return (sortA < sortB) ? -1 : (sortA > sortB) ? 1 : 0;
         });
         $('.tasks-list').html(html);
@@ -248,30 +250,34 @@ $(document).ready(function () {
     $('#subDateStart').click(function () {
         // event.stopPropagation();
         event.preventDefault();
-        $.ajax({
-            url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
-            type: "POST", //метод отправки
-            dataType: "html", //формат данных
-            data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
-            // data: data,
-            success: function (response) { //Данные отправлены успешно
-                // console.log($.parseJSON(response));
-                if (response === "error") {
-                   alert("Вкажіть хоча б одну дату.");
-                } else {
-                    $('.tasks-list').empty();
-                    $('.tasks-list').append(response);
+        if(($('#sDateEnd input[name = search-start-date]').val() == "") & ($('#sDateEnd input[name = search-end-date]').val() == "")){
+            alert("Вкажіть хоча б одну з дат");
+        }
+        else {
+            $.ajax({
+                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+                // data: data,
+                success: function (response) { //Данные отправлены успешно
+                    // console.log($.parseJSON(response));
+                    if (response === "error") {
+                        alert("Вкажіть хоча б одну дату.");
+                    } else {
+                        $('.tasks-list').empty();
+                        $('.tasks-list').append(response);
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    console.log("don't send");
                 }
-            },
-            error: function (response) { // Данные не отправлены
-                console.log("don't send");
-            }
-        });
-
+            });
+        }
     });
     var managerContent = $('.tasks-list').html();
     $('#clearDateStart').click(function () {
-
+        $('#sDateEnd')[0].reset();
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });

@@ -165,7 +165,7 @@ h2 {font-size: 1.5rem;}
     color: black;
     font-size: 14px;
 }
-.logout-block__exit-btn span {color: black;}
+.logout-block__exit-btn span {color: white;}
 .hi-message {
     width: 350px;
     height: 100%;
@@ -174,12 +174,29 @@ h2 {font-size: 1.5rem;}
     justify-content: space-around;
 }
 .logout-block {
-    width: 50px;
-    height: 100%;
-    border-left: 1px solid black;
+    height: 70%;
     justify-content: center;
     align-items: center;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    background-color: #77a89c;
+    border: 1px solid white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 18px;
+    padding-right: 18px;
+}
+
+* {
+    position: relative;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
 }
 .main__panels {
     width: 100%;
@@ -207,9 +224,13 @@ h2 {font-size: 1.5rem;}
 }
 .tabs__tabs-rows {
     display: flex;
-    justify-content: flex-start;
+    /* justify-content: flex-start; */
     align-items: stretch;
     height: 60px;
+    position: sticky;
+    top: 0;
+    z-index: 1;
+    background-color: white;
 }
 .tabs-rows__item {
     width: 200px;
@@ -333,6 +354,9 @@ h2 {font-size: 1.5rem;}
     padding: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
     background: #aaf0df;
+    position: sticky;
+    top: 50px;
+    z-index: 1;
 }
 .labels-row__label {
     position: relative;
@@ -359,6 +383,7 @@ h2 {font-size: 1.5rem;}
     box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
     border-radius: 5px;
     padding: 3px;
+    margin-top: 10px;
 
 }
 .labels-row__label form button {
@@ -458,10 +483,10 @@ h2 {font-size: 1.5rem;}
 .table__row {
     display: grid;
     grid-template-columns: repeat(9, 1fr);
-    grid-column-gap: 10px;
+    grid-column-gap: 3px;
     justify-content: space-between;
     grid-template-areas:
-            "date-start title  numbers performers-departament performers sender receiver date-end status"
+            "date-start title  numbers performers-departament performers date-end sender receiver status"
             "desc desc desc desc desc desc desc desc desc"
             "attach attach attach attach attach attach attach attach attach";
 
@@ -469,6 +494,8 @@ h2 {font-size: 1.5rem;}
     /*border: 1px solid black;*/
     margin: 15px 0;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 20px 0 rgba(0,0,0,0.19);
+    padding-bottom: 13px;
+    background-color: white;
 }
 .row__col-date-start, .row__col-task-ascod, .row__col-task-moz, .row__col-task-departament, .row__col-performers,
 .row__col-date-end, .row__col-sender, .row__col-receiver, .row__col-status {
@@ -476,7 +503,18 @@ h2 {font-size: 1.5rem;}
     display: flex;
     justify-content: center;
 }
-.attach-row__link span {color: lightgrey; font-size: 14px;}
+.attach-row__link span {
+    
+    background-color: #77a89c;
+    border: 1px solid white;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    padding: 3px;
+    padding-left: 18px;
+    padding-right: 18px;
+    }
+
+
 .numbers-task {grid-area: numbers;}
 .row__col-date-start{grid-area: date-start;}
 .row__col-task-moz {grid-area: number-moz;}
@@ -489,14 +527,18 @@ h2 {font-size: 1.5rem;}
 .row__col-receiver {grid-area: receiver;}
 .row__col-status {grid-area: status;}
 .row__desc-row {
-    margin: 10px 0;
-    grid-area: desc;}
+    margin: 3px 0;
+    grid-area: desc;
+    margin-bottom: 8px;}
 .row__attach-row {grid-area: attach;}
 .rezult {
     max-width: 540px;
     width: 100%;
     margin: 10px auto;
     text-align: center;
+}
+.attach-row__status-attach {
+    display: none;
 }
 .page-404 {
     width: 100%;
