@@ -184,10 +184,10 @@ if (isset($_POST['addTask'])):
     else:
         $department_perfomance = $_POST['department-perfomance'];
     endif;
-    if (empty($_POST['task_num-department'])):
+    if (empty($_POST['task_num-departament'])):
         $task_num_department = "";
     else:
-        $task_num_department = $_POST['task_num-department'];
+        $task_num_department = $_POST['task_num-departament'];
     endif;
     if (empty($_POST['task_num-askod'])):
         $task_num_askod = "";
@@ -344,5 +344,28 @@ if (empty($_POST['search-theme'])):
 
 else:
     $tasks = getSearchTitle($_POST['search-theme']);
+    renderTaskList($tasks);
+endif;
+//=====search for numbers tasks
+if ((empty($_POST['search-moz']) and empty($_POST['search-ascod']) and empty($_POST['search-department']))):
+else:
+    $ar = $_POST;
+    $tasks = array();
+    foreach ($ar as $k => $v):
+        if ($v !== ""):
+            switch ($k):
+                case "search-moz":
+                    $field = "letter_num-moz";
+                    break;
+                case "search-ascod":
+                    $field = "letter_num-ascod";
+                    break;
+                case "search-department":
+                    $field = "letter_num-departament";
+                    break;
+            endswitch;
+            $tasks = getSearchNumbers($field, $v);
+        endif;
+    endforeach;
     renderTaskList($tasks);
 endif;

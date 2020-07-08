@@ -125,11 +125,16 @@ h2 {font-size: 1.5rem;}
     font-size: 16px;
     color: green;
     text-transform: uppercase;
+    font-weight: 700;
+    color: #77a89c;
 }
 .btns-row__reset span{
     font-size: 16px;
     color: red;
     text-transform: uppercase;
+    color: #ED7464;
+    text-transform: uppercase;
+    font-weight: 700;
 }
 .auth__content {
     width: 100%;
@@ -190,14 +195,14 @@ h2 {font-size: 1.5rem;}
     padding-right: 18px;
 }
 
-* {
+/** {
     position: relative;
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
-}
+}*/
 .main__panels {
     width: 100%;
     min-height: 100vh;
@@ -330,8 +335,12 @@ h2 {font-size: 1.5rem;}
 }
 .form__btns-row button{
     padding: 10px;
-    border: 1px solid grey;
     cursor: pointer;
+    background-color: white;
+    border: 1.3px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    box-shadow: 0 0 3px grey;
 }
 .btns-row__submit {
     margin-right: 5px;
@@ -514,11 +523,11 @@ h2 {font-size: 1.5rem;}
     padding-right: 18px;
     }
 
-
+.row__col-task-department {width: 230px;}
 .numbers-task {grid-area: numbers;}
 .row__col-date-start{grid-area: date-start;}
-.row__col-task-moz {grid-area: number-moz;}
-.row__col-task-ascod {grid-area: number-ascod;}
+.row__col-task-moz {grid-area: number-moz;width: 230px;margin-bottom: 2px;}
+.row__col-task-ascod {grid-area: number-ascod;width: 230px;margin-bottom: 2px;}
 .row__col-task-departament {grid-area: number-departament;}
 .row__col-task-number {grid-area: number;}
 .row__col-performers {grid-area: performers;}

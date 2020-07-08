@@ -192,9 +192,10 @@ else:
         </form>
         </div>
         <div class="labels-row__label numbers">
+        <form id="sNumbers" method="post" action="">
         <div class="label__block-moz">
         <span class="labels-row__label">Номер вхідного по МОЗ</span>
-        <form id="sNumbers" method="post" action="">
+        
         <input type="search" name="search-moz">
 </div>
         <div class="label__block-ascod">
@@ -210,8 +211,8 @@ else:
              <button type="reset" id="resNumbers">
             <span>Відміна</span>
             </button>
-        </form>
 </div>
+</form>
 </div>       
         <div class="labels-row__label">
         <span class="label__text">Виконавці по департаменту</span>

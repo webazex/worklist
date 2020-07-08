@@ -55,3 +55,7 @@ function getSearchTitle($title){
     $search = bd::db_search_title($title);
     return $search;
 }
+function getSearchNumbers($f, $v){
+    $search = bd::db_search_numbers($f, $v);
+    return $search;
+}
