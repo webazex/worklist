@@ -400,7 +400,7 @@ class DB
         else:
             $arRezult = array();
             $bd = self::db_connect();
-            $bd->real_query("SELECT * FROM `tasks` WHERE `title` like '".$title."'");
+            $bd->real_query("SELECT * FROM `tasks` WHERE `title` LIKE '%".$title."%'");
             $ret = $bd->use_result();
             while ($row = $ret->fetch_row()):
                 array_push($arRezult, $row);
@@ -469,5 +469,6 @@ if (!empty($_POST)):
 //$q = $data::db_get_users($arr = array(1, 2, 3, 19, 21, 22));
 //print_r($q);
 //$q = $data::db_search_start_interval_date('2020-07-06');
+//$q = $data::db_search_title('s');
 //print_r($q);
 endif;

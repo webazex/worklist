@@ -51,3 +51,7 @@ function getSearchIntervalDate($date_start, $date_limit){
     $search = bd::db_search_interval_date($date_start, $date_limit);
     return $search;
 }
+function getSearchTitle($title){
+    $search = bd::db_search_title($title);
+    return $search;
+}

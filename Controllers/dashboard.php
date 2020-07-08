@@ -316,6 +316,7 @@ function renderTaskList($tasks)
     endforeach;
     echo $rows;
 }
+
 if ((empty($_POST['search-start-date']) and empty($_POST['search-end-date']))):
 
 else:
@@ -326,7 +327,7 @@ else:
     if ($_POST['search-start-date'] == ""):
         if ($_POST['search-end-date'] !== ""):
             echo "do";
-        $tasks = getSearchBeforeDate($_POST['search-end-date']);
+            $tasks = getSearchBeforeDate($_POST['search-end-date']);
         endif;
     endif;
     if ($_POST['search-end-date'] == ""):
@@ -335,5 +336,13 @@ else:
             $tasks = getSearchAfterDate($_POST['search-start-date']);
         endif;
     endif;
+    renderTaskList($tasks);
+endif;
+
+//search title
+if (empty($_POST['search-theme'])):
+
+else:
+    $tasks = getSearchTitle($_POST['search-theme']);
     renderTaskList($tasks);
 endif;

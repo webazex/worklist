@@ -261,7 +261,6 @@ $(document).ready(function () {
                 data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
                 // data: data,
                 success: function (response) { //Данные отправлены успешно
-                    // console.log($.parseJSON(response));
                     if (response === "error") {
                         alert("Вкажіть хоча б одну дату.");
                     } else {
@@ -278,6 +277,35 @@ $(document).ready(function () {
     var managerContent = $('.tasks-list').html();
     $('#clearDateStart').click(function () {
         $('#sDateEnd')[0].reset();
+        $('.tasks-list').empty();
+        $('.tasks-list').append(managerContent);
+    });
+    $('#subTheme').click(function () {
+        event.preventDefault();
+        if($('#sTheme input[name = search-theme]').val() == "") {
+            alert("Не заповнено поле пошуку теми.");
+        } else {
+            $.ajax({
+                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $('#sTheme').serializeArray(),  // Сеарилизуем объект
+                success: function (response) { //Данные отправлены успешно
+                    if (response === "error") {
+                        alert("Не заповнено поле пошуку теми.");
+                    } else {
+                        $('.tasks-list').empty();
+                        $('.tasks-list').append(response);
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    console.log("don't send");
+                }
+            });
+        }
+    });
+    $('#resTheme').click(function () {
+        $('#sTheme')[0].reset();
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });
