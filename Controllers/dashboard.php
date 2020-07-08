@@ -369,9 +369,15 @@ endif;
 
 //===search for performers
 if (empty($_POST['search-performers'])):
-    else:
+else:
     if ($_POST['search-performers'] !== "default"):
         $tasks = getSearchPerformers($_POST['search-performers']);
         renderManagerTaskList($tasks);
     endif;
+endif;
+
+//==== search for performers department
+if (!empty($_POST['search-department-perfomance'])):
+    $tasks = getSearchDepartmentPerformers($_POST['search-department-perfomance']);
+    renderManagerTaskList($tasks);
 endif;

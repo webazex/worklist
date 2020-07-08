@@ -64,3 +64,7 @@ function getSearchPerformers($v){
     $search = bd::db_search_performers($v);
     return $search;
 }
+function getSearchDepartmentPerformers($v){
+    $search = bd::db_search_department_performers($v);
+    return $search;
+}

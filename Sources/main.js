@@ -394,4 +394,35 @@ $(document).ready(function () {
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });
+
+    // =====ajax search department performers
+    $('#subDepPerfomance').click(function () {
+        event.preventDefault();
+        if(($('#sDepartmentPerfomance input[name = search-department-perfomance]').val() == "")){
+            alert("Вкажіть дані для пошуку.");
+        } else {
+            $.ajax({
+                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $('#sDepartmentPerfomance').serializeArray(),  // Сеарилизуем объект
+                success: function (response) { //Данные отправлены успешно
+                    if (response === "error") {
+                        alert("Оберіть виконавця.");
+                    } else {
+                        $('.tasks-list').empty();
+                        $('.tasks-list').append(response);
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    console.log("don't send");
+                }
+            });
+        }
+    });
+    $('#resDepPerfomance').click(function () {
+        $('#sDepartmentPerfomance')[0].reset();
+        $('.tasks-list').empty();
+        $('.tasks-list').append(managerContent);
+    });
 });
