@@ -12,7 +12,14 @@ function getUserData()
     $user = $_SESSION[$k];
     return $user;
 }
-
+function getHeaderTitle() {
+    $html = '<div class="header__title">
+<h1>"КНП" ХОІАЦМС</h1>
+<h2>Сервіс постановки та обробки задач</h2>
+<h3>Бета-тест. v. 0.1</h3>
+</div>';
+echo $html;
+}
 function getHiMessage()
 {
     $mounts = date('F');

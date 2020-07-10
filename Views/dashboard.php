@@ -22,7 +22,7 @@ if(app::Status_visitor()):
 <body>
 <div class="site-size">
     <header>
-        <?php getHiMessage(); getLogout();?>
+        <?php getHiMessage(); getHeaderTitle(); getLogout();?>
     </header>
     <main>
         <button type="button" id="btn_up" class="button-Up"><span>Вгору</span></button>
@@ -35,7 +35,12 @@ if(app::Status_visitor()):
             <?php getTemplate(); ?>
         </div>
     </main>
-    <footer></footer>
+    <footer>
+        <div class="footer-box">
+            <span>Beta - версія.</span>
+            <span>v. 0.1</span>
+        </div>
+    </footer>
 </div>
 <script
     src="https://code.jquery.com/jquery-3.5.1.min.js"

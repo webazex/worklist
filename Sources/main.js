@@ -498,3 +498,4 @@ $('#btn_up').click(function() {
     $('html, body').animate({scrollTop: 0},500);
     return false;
 });
+// ====ajax update tasks list
