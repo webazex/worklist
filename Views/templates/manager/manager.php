@@ -1,5 +1,4 @@
 <?php
-//echo "22";
 $users = getListUsersNames();
 $list = '';
 $options = '';
@@ -90,7 +89,7 @@ else:
         <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '">
 </div>
         <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '">
-        <input class="row__col-task-performers" type="text" name="performers" value="' . $names . '" readonly="readonly">
+        <textarea class="row__col-task-performers" type="text" name="performers" readonly="readonly">' . $names . '</textarea>
         <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
         <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
         <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">

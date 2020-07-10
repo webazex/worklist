@@ -12,9 +12,7 @@ $key_for_hidden = mt_rand(3, 6);
 $rows = '';
 //$tasks = getTaskForUser($_SESSION['id']);
 $id = 'user_'.$_SESSION['id'];
-//$tasks = getTasksForKanc($_SESSION[$id]['role']);
-print_r($_SESSION);
-//$tasks = getTaskForUser($_SESSION[$id]['id']);
+$tasks = getTaskForUser($_SESSION[$id]['id']);
 $strId = "";
 if (empty($tasks)):
     echo '<div class="panels__home-panels">Задачі відсутні</div>
@@ -41,16 +39,16 @@ else:
         $names = implode(", ", $performersList);
         $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
         <input type="hidden" name="taskId" value="' . $task[0] . '">
-<input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '">
-        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '">
+<input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '" readonly="readonly">
+        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '" readonly="readonly">
         <div class="numbers-task">
-         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '">
-        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '">
-        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '">
+         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '" readonly="readonly">
+        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '" readonly="readonly">
+        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '" readonly="readonly">
 </div>
-        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '">
-        <input class="row__col-task-performers" type="text" name="performers" value="' . $names . '" readonly="readonly">
-        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
+        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '" readonly="readonly">
+        <textarea class="row__col-task-performers" type="text" name="performers" readonly="readonly">' . $names . '</textarea>
+        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '" readonly="readonly">
         <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
         <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
        <select class="row__col-status"  name="status">'.$statusHtml.'
@@ -74,48 +72,8 @@ else:
 <div class="panels__home-panels">
 <div class="home-panels__tabs">
 <div class="tabs__block" id="manager_tabs">
-    <div class="tabs__tabs-rows">
-        <div class="tabs-rows__item" id="1">
-            <span>поставити задачі</span>
-        </div>
-        <div class="tabs-rows__item" id="2">
-            <span>переглянути задачі</span>
-        </div>
-    </div>
     <div class="tabs__section-container">
-        <div class="section-container__tabs-section" data-id="1">
-            <form class="tabs-section__new-task-form" id="newTaskForm" method="post" action="" enctype="multipart/form-data">
-                <div class="new-task-form__content">
-                    <div class="content__list-users">
-                    <h3>Вкажіть виконавця(-ів):</h3>
-                     <ul class="list-users__list">' . $list . '                     
-</ul>
-<div class="form__btns-row">
-                <button type="submit" class="btns-row__submit" id="task_submit"><span>Поставити задачу</span></button>
-                 <button type="reset" class="btns-row__reset"><span>Очистити</span></button>
-</div>
-</div>
-<div class="content__form">
-<input type="text" name="task_num-departament" class="task-num-departament"  placeholder="Вкажіть номер вхідного листа по департаменту">
-<input type="text" name="task_num-askod" class="task-num-askod" placeholder="Вкажіть номер вхідного листа по ASCOD">
-<input type="text" name="task_num-moz" class="task-num-moz"  placeholder="Вкажіть номер вхідного листа по МОЗ">
-<label class="task-theme"><span>Вкажіть тему вхідного листа</span><input type="text" name="task__title" class="task-title" required="required"  placeholder="Не обов’язково"></label>
-<label class="date-start"><span>Дата постановки задачі</span>
-    <input type="date" name="date-start"  required="required" min="" max="">
-</label>
-<label class="date-end"><span>Кінцевий термін виконання</span>
-    <input type="date" name="date-end"  required="required">
-</label>
-
-<textarea name="department-perfomance" class="department-perfomance" placeholder="Вкажіть виконавців департаменту (якщо потрібно)"></textarea>
-<textarea name="task__desc" class="textarea" placeholder="Вкажіть деталі вхідного листа (якщо потрібно)"></textarea>
-<input type="file" name="task__attach[]" class="task-num-file" multiple="multiple" placeholder="Додайте файли (при необхідності)"></input>
-<input type="hidden" name="addTask" value="' . $key_for_hidden . '">
-                </div>
-                </div>
-            </form>
-            <div class="callback" id="callback"></div>
-        </div><div class="section-container__tabs-section" data-id="2">
+        <div class="section-container__tabs-section" data-id="2">
         <div class="tabs-section__table"><div class="table__labels-row">
         <div class="labels-row__label">
         <div class="label__data-block-label">
@@ -196,17 +154,6 @@ else:
         </div>
         <div class="labels-row__label">
         <span class="label__text">Виконавці(-ець)</span>
-        <form action="" id="sPerfomance" method="post">
-        <select class="search-performers" name="search-performers">
-        <option default value="default"><span>Оберіть виконавця</span></option>'.$options.'
-</select>
-        <button type="submit" id="subPerfomance">
-            <span>Пошук</span>
-            </button>
-            <button type="reset" id="resPerfomance">
-            <span>Відміна</span>
-            </button>
-        </form>
         </div>
         <div class="labels-row__label">
             <div class="label__text">

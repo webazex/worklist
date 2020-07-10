@@ -485,3 +485,16 @@ $('.tasks-list form').on( "click", "button#edit_task", function() {
 });
 // ===ajax edit task
 
+// hiding for scroll
+$(window).scroll(function () {
+    if ($(this).scrollTop() > 388) {
+        $('#btn_up').css({'display': 'block'});
+    } else {
+        $('#btn_up').css({'display': 'none'});
+    }
+});
+// ====scroll for click up
+$('#btn_up').click(function() {
+    $('html, body').animate({scrollTop: 0},500);
+    return false;
+});

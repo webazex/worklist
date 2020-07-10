@@ -25,7 +25,13 @@ if(app::Status_visitor()):
         <?php getHiMessage(); getLogout();?>
     </header>
     <main>
+        <button type="button" id="btn_up" class="button-Up"><span>Вгору</span></button>
         <div class="main__panels">
+            <div class="no-display">
+                <span>
+                Мінімально можливе розширення екрану\робочого столу 1200 на 768. Змініть розширення робочого столу, або викоистовуйте більш новий монітор.
+                </span>
+            </div>
             <?php getTemplate(); ?>
         </div>
     </main>

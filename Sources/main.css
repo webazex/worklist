@@ -6,6 +6,19 @@
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
 }
+.no-display {
+    width: 100%;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    display: none;
+}
+.no-display span {
+    font-size: 2rem;
+    color: red;
+    font-weight: bold;
+    text-align: center;
+}
 header {
     width: 100%;
     height: 78px;
@@ -365,9 +378,6 @@ h2 {font-size: 1.5rem;}
     padding: 5px;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
     background: #aaf0df;
-    position: sticky;
-    top: 50px;
-    z-index: 1;
 }
 .labels-row__label {
     position: relative;
@@ -571,6 +581,21 @@ h2 {font-size: 1.5rem;}
 .attach-row__status-attach {
     display: none;
 }
+.button-Up {
+    position: sticky;
+    z-index: 9;
+    width: 60px;
+    height: 60px;
+    background: #aaf0df;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    border-radius: 50%;
+    top: 90vh;
+    left: 96vw;
+    display: none;
+}
+.button-Up span {color: black;}
 .page-404 {
     width: 100%;
     display: flex;
@@ -586,4 +611,12 @@ h2 {font-size: 1.5rem;}
     padding: 20px;
     border: 1px solid white;
     color: white;
+}
+/*===========mini adaptive start======*/
+@media (max-width: 1885px){
+    .labels-row__label form button {width: 100%;}
+}
+@media(max-width: 1200px){
+    .main__panels > * {display: none;}
+    .no-display {display: flex;}
 }

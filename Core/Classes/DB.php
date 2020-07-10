@@ -57,7 +57,7 @@ class DB
             throw new \Exception('Немає з’єднання з базою данних!');
         else:
             $bd = self::db_connect();
-            $bd->real_query("SELECT * FROM " . "`" . $table_name . "`");
+            $bd->real_query("SELECT * FROM " . "`" . $table_name . "` ORDER BY `". $table_name ."`.`id` DESC");
             if ($return = $bd->use_result()):
                 $arRezult = array();
                 while ($row = $return->fetch_row()):
@@ -310,7 +310,7 @@ class DB
             $bd = self::db_connect();
             $l = mysqli_real_escape_string($bd, $like);
             $s = '\"' . $l . '\"';
-            $bd->real_query("SELECT * FROM `tasks` WHERE `performers` REGEXP '" . $s . "'");
+            $bd->real_query("SELECT * FROM `tasks` WHERE `performers` REGEXP '" . $s . "' ORDER BY `tasks`.`id` DESC");
             if ($return = $bd->use_result()):
                 $arRezult = array();
                 while ($row = $return->fetch_row()):
