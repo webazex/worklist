@@ -65,6 +65,14 @@ else:
     foreach ($tasks as $task):
         $ar = explode(",", $task[11]);
         $folder = $task[13];
+        $status = $task[12];
+        if($status == "В роботі"):
+            $statusHtml = '<option selected="selected" value="0"<span>В роботі</span></option>
+       <option value="1"><span>Виконано</span></option>';
+        else:
+            $statusHtml = '<option selected="selected" value="1"<span>Виконано</span></option>
+       <option value="0"><span>В роботі</span></option>';
+        endif;
         $arIds = array();
         foreach ($ar as $a):
             $a = preg_replace("/\"/", " ", $a);
@@ -86,11 +94,9 @@ else:
         <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
         <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
         <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
-
-
-       <select class="row__col-status"  name="status">
-       <option selected="selected" value="0"<span>В роботі</span></option>
-       <option value="1"><span>Виконано</span></option>
+       <select class="row__col-status"  name="status">'.$statusHtml.'
+      
+       
 </select>
         <textarea name="desc" class="row__desc-row">' . $task[6] . '</textarea>
         <div class="row__attach-row">
@@ -277,13 +283,7 @@ else:
         <div class="labels-row__label">
         <div class="label__text">
         <span>Статус</span>
-        </div>
-        <form action="" id="sStatus" method="post">
-        <select class="select-status">
-        <option value="010"><span>В роботі</span></option>
-        <option value="020"><span>Виконано</span></option>
-</select>
-</form>
+        </div>      
 </div></div> <div class="tasks-list">' .$rows. '</div>
 
 </div>

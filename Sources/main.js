@@ -479,13 +479,9 @@ $('.tasks-list form').on( "click", "button#edit_task", function() {
             }
         },
         error: function (response) { // Данные не отправлены
-            // let r = JSON.parse(response);
             alert("Помилка відправки");
-            // console.log("don't send");
-            // console.log(response);
         }
     });
 });
-
-
 // ===ajax edit task
+
