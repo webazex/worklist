@@ -273,11 +273,13 @@ h2 {font-size: 1.5rem;}
 }
 .task-num-file {grid-area: attach;}
 .task-num-file::after{
+    position: absolute;
     content: 'Не більше 128 Мб';
     color: orangered;
     text-align: center;
-    margin-left: 120px;
+    /*margin-left: 120px;*/
     font-size: 14px;
+    right: 5px;
 }
 .task-num-file #file-upload-button {color: red;}
 .content__form {
@@ -375,7 +377,6 @@ h2 {font-size: 1.5rem;}
     align-items: stretch;
     font-weight: bold;
     font-size: 12px;
-    background: #aaf0df;
     text-align: left;
     margin: 8px;
 }
@@ -385,6 +386,14 @@ h2 {font-size: 1.5rem;}
 }
 .labels-row__label form  input {
     width: 100%;
+    height: 25px;
+    
+    background-color: white;
+    border: 1px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    outline-color: #77a89c;
+    padding: 5px;
 }
 .row__btns-row button{
     background-color: white;
@@ -421,8 +430,8 @@ h2 {font-size: 1.5rem;}
     
 }
 .select-status {
-    width: 101px;
-    height: 35px;
+    width: 100%;
+    height: 25px;
     margin-top: 7px;
     background-color: white;
     border: 1px solid #77a89c;
@@ -430,6 +439,18 @@ h2 {font-size: 1.5rem;}
     border-radius: 5px;
     outline-color: #77a89c;
 }
+
+.search-performers {
+    width: 100%;
+    height: 25px;
+    margin-top: 7px;
+    background-color: white;
+    border: 1px solid #77a89c;
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);
+    border-radius: 5px;
+    outline-color: #77a89c;
+}
+
 .select-status option {
     background: transparent;
 }
@@ -491,7 +512,8 @@ h2 {font-size: 1.5rem;}
 }
 .table__row {
     display: grid;
-    grid-template-columns: repeat(9, 1fr);
+    /*grid-template-columns: repeat(9, 1fr);*/
+    grid-template-columns: repeat(9, minmax(100px, 1fr));
     grid-column-gap: 3px;
     justify-content: space-between;
     grid-template-areas:

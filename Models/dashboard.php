@@ -68,3 +68,23 @@ function getSearchDepartmentPerformers($v){
     $search = bd::db_search_department_performers($v);
     return $search;
 }
+function getSearchBeforeDateEnd($date_limit){
+    $search = bd::db_search_end_interval_date_end($date_limit);
+    return $search;
+}
+function getSearchAfterDateEnd($date_start){
+    $search = bd::db_search_start_interval_date_end($date_start);
+    return $search;
+}
+function getSearchIntervalDateEnd($date_start, $date_limit){
+    $search = bd::db_search_interval_date_end($date_start, $date_limit);
+    return $search;
+}
+//function getId($fio){
+//    $arIds = bd::db_get_custom_fields_with_filter('id','users', 'fio', $fio);
+//    return $arIds;
+//}
+function updateTask($id, $data){
+    $query = bd::db_update_in_table('tasks', $data, $id);
+    return $query;
+}

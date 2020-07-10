@@ -72,15 +72,16 @@ else:
         endforeach;
         $performersList = getUsersList($arIds);
         $names = implode(", ", $performersList);
-        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="tId-' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+        <input type="hidden" name="taskId" value="' . $task[0] . '">
 <input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '">
-        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '" readonly="readonly">
+        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '">
         <div class="numbers-task">
-         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '" readonly="readonly">
-        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '" readonly="readonly">
-        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '" readonly="readonly">
+         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '">
+        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '">
+        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '">
 </div>
-        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '" readonly="readonly">
+        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '">
         <input class="row__col-task-performers" type="text" name="performers" value="' . $names . '" readonly="readonly">
         <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
         <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
@@ -91,7 +92,7 @@ else:
        <option selected="selected" value="0"<span>В роботі</span></option>
        <option value="1"><span>Виконано</span></option>
 </select>
-        <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
+        <textarea name="desc" class="row__desc-row">' . $task[6] . '</textarea>
         <div class="row__attach-row">
         <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>Вкладення</span></a>
         <span class="attach-row__status-attach">Yes \ No</span>
@@ -169,7 +170,7 @@ else:
 </button>
 </div>
             </div>
-            <form action="" id="sDateEnd" method="post">
+            <form action="" id="sDateStart" method="post">
             <input type="date" name="search-start-date">
             <input type="date" name="search-end-date">
             <button type="submit" id="subDateStart" name="searchDateStart">

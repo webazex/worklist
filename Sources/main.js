@@ -271,17 +271,19 @@ $(document).ready(function () {
         });
         $('.tasks-list').html(html);
     });
+
+    // =====ajax search for date-start
     $('#subDateStart').click(function () {
         // event.stopPropagation();
         event.preventDefault();
-        if (($('#sDateEnd input[name = search-start-date]').val() == "") & ($('#sDateEnd input[name = search-end-date]').val() == "")) {
+        if (($('#sDateStart input[name = search-start-date]').val() == "") & ($('#sDateStart input[name = search-end-date]').val() == "")) {
             alert("Вкажіть хоча б одну з дат");
         } else {
             $.ajax({
                 url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
                 type: "POST", //метод отправки
                 dataType: "html", //формат данных
-                data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+                data: $('#sDateStart').serializeArray(),  // Сеарилизуем объект
                 // data: data,
                 success: function (response) { //Данные отправлены успешно
                     if (response === "error") {
@@ -299,7 +301,7 @@ $(document).ready(function () {
     });
     var managerContent = $('.tasks-list').html();
     $('#clearDateStart').click(function () {
-        $('#sDateEnd')[0].reset();
+        $('#sDateStart')[0].reset();
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });
@@ -425,4 +427,65 @@ $(document).ready(function () {
         $('.tasks-list').empty();
         $('.tasks-list').append(managerContent);
     });
+
+    // =====ajax search for date-end
+    $('#subDateEnd').click(function () {
+        // event.stopPropagation();
+        event.preventDefault();
+        if (($('#sDateEnd input[name = search-start-date-e]').val() == "") & ($('#sDateEnd input[name = search-end-date-e]').val() == "")) {
+            alert("Вкажіть хоча б одну з дат");
+        } else {
+            $.ajax({
+                url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+                type: "POST", //метод отправки
+                dataType: "html", //формат данных
+                data: $('#sDateEnd').serializeArray(),  // Сеарилизуем объект
+                // data: data,
+                success: function (response) { //Данные отправлены успешно
+                    if (response === "error") {
+                        alert("Вкажіть хоча б одну дату.");
+                    } else {
+                        $('.tasks-list').empty();
+                        $('.tasks-list').append(response);
+                    }
+                },
+                error: function (response) { // Данные не отправлены
+                    console.log("don't send");
+                }
+            });
+        }
+    });
+    var managerContent = $('.tasks-list').html();
+    $('#resDateEnd').click(function () {
+        $('#sDateEnd')[0].reset();
+        $('.tasks-list').empty();
+        $('.tasks-list').append(managerContent);
+    });
 });
+$('.tasks-list form').on( "click", "button#edit_task", function() {
+    event.preventDefault();
+    let id = 'tId-'+$(this).parent().parent().attr('data-id');
+    $.ajax({
+        url: '/Controllers/dashboard.php', //url страницы (action_ajax_form.php)
+        type: "POST", //метод отправки
+        dataType: "html", //формат данных
+        data: $('#'+id).serializeArray(),  // Сеарилизуем объект
+        // data: data,
+        success: function (response) { //Данные отправлены успешно
+            if(response == "true"){
+                alert("Дані успішно оновлено");
+            }else if(response == "false"){
+                alert("Дані успішно оновлено");
+            }
+        },
+        error: function (response) { // Данные не отправлены
+            // let r = JSON.parse(response);
+            alert("Помилка відправки");
+            // console.log("don't send");
+            // console.log(response);
+        }
+    });
+});
+
+
+// ===ajax edit task

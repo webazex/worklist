@@ -351,7 +351,7 @@ class DB
         else:
             $arRezult = array();
             $bd = self::db_connect();
-            $bd->real_query("SELECT * FROM `tasks` WHERE `date_start` >= '" . $date_start . "' AND `date_end` <= '" . $date_limit . "'");
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_start` >= '" . $date_start . "' AND `date_start` <= '" . $date_limit . "'");
             $ret = $bd->use_result();
             while ($row = $ret->fetch_row()):
                 array_push($arRezult, $row);
@@ -393,6 +393,59 @@ class DB
         endif;
         return $arRezult;
     }
+
+    static function db_search_interval_date_end($date_start, $date_limit)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_end` >= '" . $date_start . "' AND `date_end` <= '" . $date_limit . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
+
+    static function db_search_start_interval_date_end($date_start)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_end` >= '" . $date_start . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
+
+    static function db_search_end_interval_date_end($date_limit)
+    {
+        $status = self::db_status();
+        if ($status == false):
+            throw new \Exception('Немає з’єднання з базою данних!');
+        else:
+            $arRezult = array();
+            $bd = self::db_connect();
+            $bd->real_query("SELECT * FROM `tasks` WHERE `date_end` <= '" . $date_limit . "'");
+            $ret = $bd->use_result();
+            while ($row = $ret->fetch_row()):
+                array_push($arRezult, $row);
+            endwhile;
+        endif;
+        return $arRezult;
+    }
+
+
     static function db_search_title($title) {
         $status = self::db_status();
         if ($status == false):

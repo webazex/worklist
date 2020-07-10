@@ -317,6 +317,7 @@ function renderManagerTaskList($tasks)
     echo $rows;
 }
 
+//====search-date-start
 if ((empty($_POST['search-start-date']) and empty($_POST['search-end-date']))):
 
 else:
@@ -380,4 +381,111 @@ endif;
 if (!empty($_POST['search-department-perfomance'])):
     $tasks = getSearchDepartmentPerformers($_POST['search-department-perfomance']);
     renderManagerTaskList($tasks);
+endif;
+
+
+//==== search for date-end
+if ((empty($_POST['search-start-date-e']) and empty($_POST['search-end-date-e']))):
+
+else:
+    if (($_POST['search-start-date-e'] !== "" and ($_POST['search-end-date-e'] !== ""))):
+        $tasks = getSearchIntervalDateEnd($_POST['search-start-date-e'], $_POST['search-end-date-e']);
+    endif;
+    if ($_POST['search-start-date-e'] == ""):
+        if ($_POST['search-end-date-e'] !== ""):
+            $tasks = getSearchBeforeDateEnd($_POST['search-end-date-e']);
+        endif;
+    endif;
+    if ($_POST['search-end-date-e'] == ""):
+        if ($_POST['search-start-date-e'] !== ""):
+            $tasks = getSearchAfterDateEnd($_POST['search-start-date-e']);
+        endif;
+    endif;
+    renderManagerTaskList($tasks);
+endif;
+
+
+//===update task
+if (!empty($_POST['taskId'])):
+    $data = array();
+    foreach ($_POST as $k => $v):
+        if ($v !== ""):
+            switch ($k):
+                case "date-start":
+                    $k = "date_start";
+                    $data[$k] = $v;
+                    break;
+                case "title":
+                    $k = "title";
+                    $data[$k] = $v;
+                    break;
+                case "moz":
+                    $k = "letter_num-moz";
+                    $data[$k] = $v;
+                    break;
+                case "ascod":
+                    $k = "letter_num-ascod";
+                    $data[$k] = $v;
+                    break;
+                case "department":
+                    $k = "letter_num-departament";
+                    $data[$k] = $v;
+                    break;
+                case "department-performers":
+                    $k = "performers_departament";
+                    $data[$k] = $v;
+                    break;
+//                case "performers":
+//                    $k = "performers";
+//
+//
+//                    $arUser = explode(",", $v);
+//                    $arIds = array();
+//                    foreach ($arUser as $fio):
+//                        $id = getId(trim($fio));
+//                        $newId = '"' . $id . '"';
+//                        array_push($arIds, $newId);
+//                    endforeach;die();
+//                    $v = implode(",", $arIds);
+//                    $data[$k] = $v;
+//                    break;
+                case "date-end":
+                    $k = "date_end";
+                    $data[$k] = $v;
+                    break;
+                case "sender":
+                    $k = "sender";
+                    $data[$k] = $v;
+                    break;
+                case "recipient":
+                    $k = "recipient";
+                    $data[$k] = $v;
+                    break;
+                case "status":
+                    $k = "status";
+                    if ($v == "0"):
+                        $v = "В роботі";
+                    elseif ($v == "1"):
+                        $v = "Виконано";
+                    endif;
+                    $data[$k] = $v;
+                    break;
+                case "desc":
+                    $k = "description";
+                    $data[$k] = $v;
+                    break;
+            endswitch;
+        endif;
+    endforeach;
+    $id = $_POST['taskId'];
+    $update = updateTask($id, $data);
+    if ($update == true):
+        echo "true";
+//        $return = array('status' => 'true');
+//        return json_encode($return);
+    else:
+        echo "false";
+//        $return = array('status' => 'false');
+//        return json_encode($return);
+    endif;
 endif;
