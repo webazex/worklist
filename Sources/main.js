@@ -498,4 +498,38 @@ $('#btn_up').click(function() {
     $('html, body').animate({scrollTop: 0},500);
     return false;
 });
-// ====ajax update tasks list
+// ====ajax update kanc tasks list
+setInterval(function() {
+    $.post(
+        "/Controllers/dashboard.php",
+        {
+            kanc: "kanc"
+        },
+        onAjaxSuccess
+    );
+
+    function onAjaxSuccess(data)
+    {
+        // Здесь мы получаем данные, отправленные сервером и выводим их на экран.
+        console.log(data);
+    }
+
+}, 300000);
+
+// ====ajax update peform tasks list
+setInterval(function() {
+    $.post(
+        "/Controllers/dashboard.php",
+        {
+            perform: "perform"
+        },
+        onAjaxSuccessPerform
+    );
+
+    function onAjaxSuccessPerform(data)
+    {
+        // Здесь мы получаем данные, отправленные сервером и выводим их на экран.
+        console.log(data);
+    }
+
+}, 300000);

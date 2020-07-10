@@ -12,14 +12,17 @@ function getUserData()
     $user = $_SESSION[$k];
     return $user;
 }
-function getHeaderTitle() {
+
+function getHeaderTitle()
+{
     $html = '<div class="header__title">
 <h1>"КНП" ХОІАЦМС</h1>
 <h2>Сервіс постановки та обробки задач</h2>
 <h3>Бета-тест. v. 0.1</h3>
 </div>';
-echo $html;
+    echo $html;
 }
+
 function getHiMessage()
 {
     $mounts = date('F');
@@ -283,15 +286,232 @@ function renderManagerTaskList($tasks)
     foreach ($tasks as $task):
         $ar = explode(",", $task[11]);
         $folder = $task[13];
+        $sender = $task[9];
+//            $list = array(
+//                'економічний (econom.med.ks@ukr.net)', 'асу (medstat-kherson@ukr.net)',
+//                'технічний відділ (to-oz@ukr.net)', 'Левко (medstat-centr@ukr.net)',
+//                'Курдіна (tanya.kurdina@ukr.net)', 'ЕОЗ (e-health@ukr.net)',
+//                'Канцелярія (kanc-medstat@ukr.net)'
+//            );
+        switch($sender):
+            case "економічний (econom.med.ks@ukr.net)":
+                $senderlist = '<option value="економічний (econom.med.ks@ukr.net)" default="default"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "асу (medstat-kherson@ukr.net)":
+                $senderlist = '<option value="асу (medstat-kherson@ukr.net)" default="default"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "технічний відділ (to-oz@ukr.net)":
+                $senderlist = '<option value="технічний відділ (to-oz@ukr.net)" default="default"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Левко (medstat-centr@ukr.net)":
+                $senderlist = '<option value="Левко (medstat-centr@ukr.net)" default="default"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Курдіна (tanya.kurdina@ukr.net)":
+                $senderlist = '<option value="Курдіна (tanya.kurdina@ukr.net)" default="default"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "ЕОЗ (e-health@ukr.net)":
+                $senderlist = '<option value="ЕОЗ (e-health@ukr.net)" default="default"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Канцелярія (kanc-medstat@ukr.net)":
+                $senderlist = '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                break;
+            default:
+                $senderlist = '<option value="" default="default"><span>Оберіть відділ</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+        endswitch;
         $arIds = array();
         foreach ($ar as $a):
             $a = preg_replace("/\"/", " ", $a);
             array_push($arIds, $a);
         endforeach;
+        $status = $task[12];
+        if($status == "В роботі"):
+            $statusHtml = '<option selected="selected" value="0"<span>В роботі</span></option>
+       <option value="1"><span>Виконано</span></option>';
+        else:
+            $statusHtml = '<option selected="selected" value="1"<span>Виконано</span></option>
+       <option value="0"><span>В роботі</span></option>';
+        endif;
         $performersList = getUsersList($arIds);
         $names = implode(", ", $performersList);
-        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="tId-' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+        <input type="hidden" name="taskId" value="' . $task[0] . '">
 <input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '">
+        <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '">
+        <div class="numbers-task">
+         <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '">
+        <input class="row__col-task-ascod" type="text" name="ascod" value="' . $task[2] . '">
+        <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '">
+</div>
+        <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '">
+        <textarea class="row__col-task-performers" type="text" name="performers" readonly="readonly">' . $names . '</textarea>
+        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
+        <select class="row__col-sender" type="text" name="sender">'.$senderlist.'</select>
+        <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
+       <select class="row__col-status"  name="status">'.$statusHtml.'
+      
+       
+</select>
+        <textarea name="desc" class="row__desc-row">' . $task[6] . '</textarea>
+        <div class="row__attach-row">
+        <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>Вкладення</span></a>
+        <span class="attach-row__status-attach">Yes \ No</span>
+</div>
+        <div class="row__btns-row">
+        <button type="submit" name="edittask" id="edit_task">Зберегти зміни</button>
+        <button type="reset" class="reset-btn">Відміна</button>
+</div>
+
+    </form>';
+    endforeach;
+    echo $rows;
+}
+function renderPerformersTaskList($tasks)
+{
+    $rows = '';
+    $rows = '';
+    foreach ($tasks as $task):
+        $ar = explode(",", $task[11]);
+        $folder = $task[13];
+        $status = $task[12];
+        if($status == "В роботі"):
+            $statusHtml = '<option selected="selected" value="0"<span>В роботі</span></option>
+       <option value="1"><span>Виконано</span></option>';
+        else:
+            $statusHtml = '<option selected="selected" value="1"<span>Виконано</span></option>
+       <option value="0"><span>В роботі</span></option>';
+        endif;
+        $arIds = array();
+        foreach ($ar as $a):
+            $a = preg_replace("/\"/", " ", $a);
+            array_push($arIds, $a);
+        endforeach;
+        $sender = $task[9];
+        switch($sender):
+            case "економічний (econom.med.ks@ukr.net)":
+                $senderlist = '<option value="економічний (econom.med.ks@ukr.net)" default="default"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "асу (medstat-kherson@ukr.net)":
+                $senderlist = '<option value="асу (medstat-kherson@ukr.net)" default="default"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "технічний відділ (to-oz@ukr.net)":
+                $senderlist = '<option value="технічний відділ (to-oz@ukr.net)" default="default"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Левко (medstat-centr@ukr.net)":
+                $senderlist = '<option value="Левко (medstat-centr@ukr.net)" default="default"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Курдіна (tanya.kurdina@ukr.net)":
+                $senderlist = '<option value="Курдіна (tanya.kurdina@ukr.net)" default="default"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "ЕОЗ (e-health@ukr.net)":
+                $senderlist = '<option value="ЕОЗ (e-health@ukr.net)" default="default"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+                break;
+            case "Канцелярія (kanc-medstat@ukr.net)":
+                $senderlist = '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                break;
+            default:
+                $senderlist = '<option value="" default="default"><span>Оберіть відділ</span></option>';
+                $senderlist .= '<option value="асу (medstat-kherson@ukr.net)"><span>асу (medstat-kherson@ukr.net)</span></option>';
+                $senderlist .= '<option value="економічний (econom.med.ks@ukr.net)"><span>економічний (econom.med.ks@ukr.net)</span></option>';
+                $senderlist .= '<option value="технічний відділ (to-oz@ukr.net)"><span>технічний відділ (to-oz@ukr.net)</span></option>';
+                $senderlist .= '<option value="Левко (medstat-centr@ukr.net)"><span>Левко (medstat-centr@ukr.net)</span></option>';
+                $senderlist .= '<option value="Курдіна (tanya.kurdina@ukr.net)"><span>Курдіна (tanya.kurdina@ukr.net)</span></option>';
+                $senderlist .= '<option value="ЕОЗ (e-health@ukr.net)"><span>ЕОЗ (e-health@ukr.net)</span></option>';
+                $senderlist .= '<option value="Канцелярія (kanc-medstat@ukr.net)"><span>Канцелярія (kanc-medstat@ukr.net)</span></option>';
+        endswitch;
+        $performersList = getUsersList($arIds);
+        $names = implode(", ", $performersList);
+        $rows .= '<form class="table__row" id="tId-' . $task[0] . '" method="post" data-id="' . $task[0] . '" action="" data-date-start="' . $task[7] . '" data-date-end="' . $task[8] . '">
+        <input type="hidden" name="taskId" value="' . $task[0] . '">
+<input class="row__col-date-start" type="text" name="date-start" value="' . $task[7] . '" readonly="readonly">
         <input class="row__col-task-title" type="text" name="title" value="' . $task[4] . '" readonly="readonly">
         <div class="numbers-task">
          <input class="row__col-task-moz" type="text" name="moz" value="' . $task[1] . '" readonly="readonly">
@@ -299,19 +519,17 @@ function renderManagerTaskList($tasks)
         <input class="row__col-task-department" type="text" name="department" value="' . $task[3] . '" readonly="readonly">
 </div>
         <input class="row__col-task-department-performers" type="text" name="department-performers" value="' . $task[5] . '" readonly="readonly">
-        <input class="row__col-task-performers" type="text" name="performers" value="' . $names . '" readonly="readonly">
-        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '">
-        <input class="row__col-sender" type="text" name="sender" value="' . $task[9] . '">
+        <textarea class="row__col-task-performers" type="text" name="performers" readonly="readonly">' . $names . '</textarea>
+        <input class="row__col-task-date-end" type="text" name="date-end" value="' . $task[8] . '" readonly="readonly">
+        <select class="row__col-sender" type="text" name="sender">'.$senderlist.'</select>
         <input class="row__col-receiver" type="text" name="recipient" value="' . $task[10] . '">
-
-
-       <select class="row__col-status"  name="status">
-       <option selected="selected" value="0"<span>В роботі</span></option>
-       <option value="1"><span>Виконано</span></option>
+       <select class="row__col-status"  name="status">'.$statusHtml.'
+      
+       
 </select>
-        <textarea name="desc" class="row__desc-row" readonly="readonly">' . $task[6] . '</textarea>
+        <textarea name="desc" class="row__desc-row">' . $task[6] . '</textarea>
         <div class="row__attach-row">
-        <a href="worklist://\\\10.168.5.201\\attaches\\' . $folder . '" class="attach-row__link"><span>Вкладення</span></a>
+        <a href="worklist://\\\10.168.5.201\\attaches\\'.$folder.'" class="attach-row__link"><span>Вкладення</span></a>
         <span class="attach-row__status-attach">Yes \ No</span>
 </div>
         <div class="row__btns-row">
@@ -495,4 +713,17 @@ if (!empty($_POST['taskId'])):
 //        $return = array('status' => 'false');
 //        return json_encode($return);
     endif;
+endif;
+
+//=====ajax request for kanc
+if (isset($_POST['kanc'])):
+    $id = 'user_'.$_SESSION['id'];
+    $tasks = getTasksForKanc($_SESSION[$id]['role']);
+    renderManagerTaskList($tasks);
+endif;
+//=====ajax request for performers
+if (isset($_POST['perform'])):
+    $id = 'user_'.$_SESSION['id'];
+    $tasks = getTasksForKanc($_SESSION[$id]['id']);
+    renderPerformersTaskList($tasks);
 endif;
