@@ -222,7 +222,8 @@ if (isset($_POST['addTask'])):
         endforeach;
         $users = implode(",", $arrUsersId);
         $folder_name = uniqid('t');
-        $path = '/volume1/attaches/' . $folder_name;
+//        $path = '/volume1/attaches/' . $folder_name;
+        $path = 'D:/attaches/' . $folder_name;
         mkdir($path);
         foreach ($_FILES["task__attach"]['tmp_name'] as $k => $tmpFilePath):
             $tmp_name = $_FILES["task__attach"]["tmp_name"][$k];
@@ -724,6 +725,6 @@ endif;
 //=====ajax request for performers
 if (isset($_POST['perform'])):
     $id = 'user_'.$_SESSION['id'];
-    $tasks = getTasksForKanc($_SESSION[$id]['id']);
+    $tasks = getTaskForUser($_SESSION[$id]['id']);
     renderPerformersTaskList($tasks);
 endif;

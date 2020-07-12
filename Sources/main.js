@@ -180,7 +180,6 @@ $(document).ready(function () {
         var data = [];
         // data[0] = $('#newTaskForm').serializeArray();
         var form = document.forms.newTaskForm;
-        console.log(form);
         data = new FormData(form);
         $.each(files, function (key, value) {
             data.append(key, value);
@@ -205,10 +204,13 @@ $(document).ready(function () {
                     if (xhr.status == 200) {
                         data = xhr.responseText;
                         if (data == "ok") {
+                            location.reload();
                             $('#callback').html('<p class="info-alert"><span>Задачу успішно поставлено</span></p>');
                         } else if (data == "false") {
+                            location.reload();
                             $('#callback').html('<p class="red-alert"><span>Задачу не створено.</span></p>');
                         } else if (data == "zero") {
+                            location.reload();
                             $('#callback').html('<p class="red-alert"><span>Відсутні вхідні данні. Працюємо над виправленням.</span></p>');
                         }
                     }
@@ -511,7 +513,8 @@ setInterval(function() {
     function onAjaxSuccess(data)
     {
         // Здесь мы получаем данные, отправленные сервером и выводим их на экран.
-        console.log(data);
+        $('.tasks-list').html(data);
+        // console.log(data);
     }
 
 }, 300000);
@@ -528,8 +531,9 @@ setInterval(function() {
 
     function onAjaxSuccessPerform(data)
     {
+        $('.tasks-list').html(data);
         // Здесь мы получаем данные, отправленные сервером и выводим их на экран.
-        console.log(data);
+        // console.log(data);
     }
 
 }, 300000);
